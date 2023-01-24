@@ -2,7 +2,7 @@
 <package>
 	<metadata>
 		<id>Mead.MusicBee</id>
-		<version>1.0.0</version>
+		<version>1.1.0</version>
 		<title>Mead.MusicBee</title>
 		<authors>Sergey Semenov</authors>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
