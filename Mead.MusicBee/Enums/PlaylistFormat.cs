@@ -1,4 +1,6 @@
-﻿namespace Mead.MusicBee.Enums;
+﻿// ReSharper disable InconsistentNaming
+
+namespace Mead.MusicBee.Enums;
 
 public enum PlaylistFormat
 {
