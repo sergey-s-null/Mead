@@ -8,9 +8,6 @@ public enum MetaDataType
     AlbumArtistRaw = 34,     // stored album artist
     Artist = 32,             // displayed artist
     MultiArtist = 33,        // individual artists, separated by a null char
-    /// <summary>
-    /// Первый артист из списка артистов, иначе отображаемый артист
-    /// </summary>
     PrimaryArtist = 19,
     Artists = 144,
     ArtistsWithArtistRole = 145,
@@ -21,9 +18,6 @@ public enum MetaDataType
     BeatsPerMin = 41,
     Composer = 43,           // displayed composer
     MultiComposer = 89,      // individual composers, separated by a null char
-    /// <summary>
-    /// Комментарий
-    /// </summary>
     Comment = 44,
     Conductor = 45,
     Custom1 = 46,
@@ -90,9 +84,6 @@ public enum MetaDataType
     Virtual24 = 156,
     Virtual25 = 157,
     Year = 88,
-    /// <summary>
-    /// Вероятно, по умолчанию может отличаться. Например "The" переносит в конец.
-    /// </summary>
     SortTitle = 163,
     SortAlbum = 164,
     SortAlbumArtist = 165,
@@ -104,16 +95,7 @@ public enum MetaDataType
     MovementCount = 171,
     ShowMovement = 172,
     Language = 173,
-    /// <summary>
-    /// Первоначальный исполнитель
-    /// </summary>
     OriginalArtist = 174,
-    /// <summary>
-    /// Год первоначального исполнения
-    /// </summary>
     OriginalYear = 175,
-    /// <summary>
-    /// Первоначальное название
-    /// </summary>
     OriginalTitle = 177
 }
