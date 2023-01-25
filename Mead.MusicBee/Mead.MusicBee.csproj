@@ -43,6 +43,7 @@
 	</ItemGroup>
 	<ItemGroup>
 		<Compile Include="Delegates\Delegates.cs" />
+		<Compile Include="Entities\PluginBase.cs" />
 		<Compile Include="Entities\PluginInfo.cs" />
 		<Compile Include="Enums\CallbackType.cs" />
 		<Compile Include="Enums\Command.cs" />
