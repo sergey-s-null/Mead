@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package>
+	<metadata>
+		<id>Mead.MusicBee.MetaInfo</id>
+		<version>1.0.0</version>
+		<title>Mead.MusicBee.MetaInfo</title>
+		<authors>Sergey Semenov</authors>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<license type="expression">MIT</license>
+		<!-- <icon>icon.png</icon> -->
+		<projectUrl>https://github.com/sergey-s-null/Mead</projectUrl>
+		<description>Contains meta info about music bee API methods.</description>
+		<!--        <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>-->
+		<!--		<copyright>$copyright$</copyright>-->
+		<!--		<tags>Tag1 Tag2</tags>-->
+	</metadata>
+</package>
