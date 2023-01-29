@@ -25,6 +25,7 @@ jobs:
       - name: Test
         run: dotnet test --no-build --verbosity normal
       - name: Pack
+        working-directory: ./${{ inputs.project-name }}
         run: dotnet pack --no-build
       - name: Push nuget package
         working-directory: ./${{ inputs.project-name }}
