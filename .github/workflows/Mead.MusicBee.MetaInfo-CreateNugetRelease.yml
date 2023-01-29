@@ -1,0 +1,12 @@
+﻿name: "[Mead.MusicBee.MetaInfo] Create nuget release"
+
+on:
+  push:
+    tags:
+      - release/Mead.MusicBee.MetaInfo/*
+
+jobs:
+  build:
+    uses: ./.github/workflows/CreateNugetRelease.yml
+    with:
+      project-name: Mead.MusicBee.MetaInfo
