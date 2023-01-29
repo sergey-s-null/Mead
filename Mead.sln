@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mead.MusicBee", "Mead.MusicBee\Mead.MusicBee.csproj", "{5BABA25B-3781-48EF-8AD0-60D24DEBD6AB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mead.MusicBee", "Mead.MusicBee\Mead.MusicBee.csproj", "{053447E3-73A5-4AEE-9E7E-D12883379DDD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mead.MusicBee.MetaInfo", "Mead.MusicBee.MetaInfo\Mead.MusicBee.MetaInfo.csproj", "{478330B1-FB24-44E0-A71A-0214B10A72F0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mead.MusicBee.MetaInfo", "Mead.MusicBee.MetaInfo\Mead.MusicBee.MetaInfo.csproj", "{05C2413B-099E-4833-AE61-54B2962BF258}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -10,13 +10,13 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5BABA25B-3781-48EF-8AD0-60D24DEBD6AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5BABA25B-3781-48EF-8AD0-60D24DEBD6AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5BABA25B-3781-48EF-8AD0-60D24DEBD6AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5BABA25B-3781-48EF-8AD0-60D24DEBD6AB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{478330B1-FB24-44E0-A71A-0214B10A72F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{478330B1-FB24-44E0-A71A-0214B10A72F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{478330B1-FB24-44E0-A71A-0214B10A72F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{478330B1-FB24-44E0-A71A-0214B10A72F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{053447E3-73A5-4AEE-9E7E-D12883379DDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{053447E3-73A5-4AEE-9E7E-D12883379DDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{053447E3-73A5-4AEE-9E7E-D12883379DDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{053447E3-73A5-4AEE-9E7E-D12883379DDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05C2413B-099E-4833-AE61-54B2962BF258}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05C2413B-099E-4833-AE61-54B2962BF258}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05C2413B-099E-4833-AE61-54B2962BF258}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05C2413B-099E-4833-AE61-54B2962BF258}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
