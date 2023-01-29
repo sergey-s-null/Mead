@@ -3,6 +3,8 @@
 on:
   release:
     types: [published]
+    tags:
+      - release/Mead.MusicBee/*
 
 jobs:
   build:
