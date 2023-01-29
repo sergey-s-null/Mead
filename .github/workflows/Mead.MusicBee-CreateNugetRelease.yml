@@ -1,8 +1,7 @@
 ﻿name: "[Mead.MusicBee] Create nuget release"
 
 on:
-  release:
-    types: [published]
+  push:
     tags:
       - release/Mead.MusicBee/*
 
