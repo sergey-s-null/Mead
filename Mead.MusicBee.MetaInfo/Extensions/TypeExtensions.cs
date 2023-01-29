@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace Mead.MusicBee.MetaInfo.Extensions;
 
-namespace Mead.MusicBee.MetaInfo.Extensions;
-
-internal static class TypeExtensions
+public static class TypeExtensions
 {
     private static readonly IReadOnlyDictionary<Type, string> BaseTypesMappings = new Dictionary<Type, string>
     {
