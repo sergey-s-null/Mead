@@ -8,6 +8,17 @@
 		<RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
 	</PropertyGroup>
 
+	<PropertyGroup>
+		<PackageId>Mead.MusicBee</PackageId>
+		<Version>1.1.1</Version>
+		<Title>Mead.MusicBee</Title>
+		<Authors>Sergey Semenov</Authors>
+		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/sergey-s-null/Mead</PackageProjectUrl>
+		<Description>Library with MusicBee Api for plugins development.</Description>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<Reference Include="System.Net.Http"/>
 		<Reference Include="System.Windows.Forms"/>
