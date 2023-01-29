@@ -21,6 +21,13 @@ public static class MethodDefinitionExtensions
         return methodDefinition.ReturnParameter.Type != typeof(void);
     }
 
+    /// <summary>
+    /// Example: for method
+    /// <code>
+    /// public void SomeMethod(int first, string second, out double result) {  }
+    /// </code>
+    /// this method return "int first, string second, out double result"
+    /// </summary>
     public static string GetClassMethodArguments(this MethodDefinition method)
     {
         var inParams = method.InputParameters
@@ -30,6 +37,14 @@ public static class MethodDefinitionExtensions
         return string.Join(", ", inParams.Concat(outParams));
     }
 
+    /// <summary>
+    /// Example: for method and method calling
+    /// <code>
+    /// public void SomeMethod(int first, string second, out double result) {  }
+    /// obj.SomeMethod(first, second, out result);
+    /// </code>
+    /// this method return "first, second, out result".
+    /// </summary>
     public static string GetMethodCallingArguments(this MethodDefinition method)
     {
         var inParams = method.InputParameters
