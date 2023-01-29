@@ -56,20 +56,29 @@
     [string]
     GetVersion()
     {
-        [xml]$content = Get-Content -Path "./$($this.projectName)/$($this.projectName).nuspec"
-        $version = $content.package.metadata.version
-        if ($version.GetType() -ne [string])
+        [xml]$content = Get-Content -Path "./$( $this.projectName )/$( $this.projectName ).csproj"
+        $versions = $content.Project.PropertyGroup.Version
+        foreach ($version in $versions)
         {
-            throw ".nuspec file has invalid state: version is not a string."
+            if ( $this.IsValidVersion($version))
+            {
+                return $version
+            }
         }
 
-        return $version
+        throw "Could not find version in csproj file."
+    }
+
+    [bool]
+    IsValidVersion([string]$version)
+    {
+        return $version -ne $null -and $version.GetType() -eq [string] -and [bool]$version
     }
 
     [string]
     GetReleaseTagName([string]$version)
     {
-        return "release/$($this.projectName)/v$version"
+        return "release/$( $this.projectName )/v$version"
     }
 
     CreateTagIfNotExists([string]$tagName)
