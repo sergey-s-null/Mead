@@ -6,6 +6,9 @@ on:
       project-name:
         required: true
         type: string
+    secrets:
+      nuget-api-key:
+        required: true
       
 jobs:
   build:
@@ -29,4 +32,4 @@ jobs:
         run: dotnet pack --no-build
       - name: Push nuget package
         working-directory: ./${{ inputs.project-name }}
-        run: dotnet nuget push ${{ inputs.project-name }}.*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+        run: dotnet nuget push ${{ inputs.project-name }}.*.nupkg --api-key ${{ secrets.nuget-api-key }} --source https://api.nuget.org/v3/index.json
