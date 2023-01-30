@@ -1,4 +1,4 @@
-﻿name: Create nuget release
+﻿name: Create release
 
 on:
   workflow_call:

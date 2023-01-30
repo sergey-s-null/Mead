@@ -1,4 +1,4 @@
-﻿name: "[Mead.MusicBee] Create nuget release"
+﻿name: "[Mead.MusicBee] Create release"
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    uses: ./.github/workflows/CreateNugetRelease.yml
+    uses: ./.github/workflows/common/CreateRelease.yml
     with:
       project-name: Mead.MusicBee
     secrets:
