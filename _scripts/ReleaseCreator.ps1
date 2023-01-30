@@ -30,8 +30,6 @@
         $this.CreateTagIfNotExists($tagName)
         $this.PushTag($tagName)
 
-        $this.CreateRelease($tagName)
-
         Write-Host "Done successfully"
     }
 
@@ -102,16 +100,6 @@
         if (-not$?)
         {
             throw "Could not push tag '$tagName'."
-        }
-    }
-
-    CreateRelease([string]$tagName)
-    {
-        Write-Host "Creating release with tag '$tagName'..."
-        gh release create $tagName --verify-tag
-        if (-not$?)
-        {
-            throw "Could not create GitHub release."
         }
     }
 }
