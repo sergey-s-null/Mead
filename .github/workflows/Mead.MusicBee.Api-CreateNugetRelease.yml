@@ -1,0 +1,14 @@
+﻿name: "[Mead.MusicBee.Api] Create nuget release"
+
+on:
+  push:
+    tags:
+      - release/Mead.MusicBee.Api/*
+
+jobs:
+  build:
+    uses: ./.github/workflows/CreateNugetRelease.yml
+    with:
+      project-name: Mead.MusicBee.Api
+    secrets:
+      nuget-api-key: ${{ secrets.NUGET_API_KEY }}
