@@ -1,0 +1,17 @@
+﻿name: "[Mead.MusicBee.Api.Autofac.DependencyInjection] Create release"
+
+on:
+  push:
+    tags:
+      - release/Mead.MusicBee.Api.Autofac.DependencyInjection/*
+
+jobs:
+  build:
+    permissions:
+      contents: write
+
+    uses: ./.github/workflows/CreateRelease.yml
+    with:
+      project-name: Mead.MusicBee.Api.Autofac.DependencyInjection
+    secrets:
+      nuget-api-key: ${{ secrets.NUGET_API_KEY }}
