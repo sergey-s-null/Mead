@@ -1,6 +1,0 @@
-﻿<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Mead.MusicBee.Api-CreateRelease" type="PowerShellRunType" factoryName="PowerShell" scriptUrl="$PROJECT_DIR$/_scripts/Mead.MusicBee.Api/CreateRelease.ps1" workingDirectory="$SolutionDir$" executablePath="C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe">
-    <envs />
-    <method v="2" />
-  </configuration>
-</component>
