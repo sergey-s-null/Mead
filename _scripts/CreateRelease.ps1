@@ -1,6 +1,7 @@
 ﻿$availableProjects = `
     "Mead.MusicBee", `
     "Mead.MusicBee.Api", `
+    "Mead.MusicBee.Api.Autofac.DependencyInjection", `
     "Mead.MusicBee.MetaInfo"
 
 $project = $args[0]
