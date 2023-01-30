@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    uses: ./.github/workflows/common/CreateRelease.yml
+    uses: ./.github/workflows/CreateRelease.yml
     with:
       project-name: Mead.MusicBee
     secrets:
