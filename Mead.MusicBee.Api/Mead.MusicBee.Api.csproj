@@ -8,6 +8,17 @@
 		<RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
 	</PropertyGroup>
 
+	<PropertyGroup>
+		<PackageId>Mead.MusicBee.Api</PackageId>
+		<Version>1.0.0</Version>
+		<Title>Mead.MusicBee.Api</Title>
+		<Authors>Sergey Semenov</Authors>
+		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/sergey-s-null/Mead</PackageProjectUrl>
+		<Description>Contains generated Api interface and wrapper.</Description>
+	</PropertyGroup>
+
 	<ItemGroup>
 	  <Reference Include="System.Net.Http" />
 	  <Reference Include="System.Windows.Forms" />
