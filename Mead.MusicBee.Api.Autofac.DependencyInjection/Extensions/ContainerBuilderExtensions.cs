@@ -12,10 +12,10 @@ public static class ContainerBuilderExtensions
         MusicBeeApiMemoryContainer musicBeeApiMemoryContainer)
     {
         builder
-            .RegisterType<MusicBeeApiMemoryContainerWrapper>()
-            .WithParameter(TypedParameter.From(musicBeeApiMemoryContainer))
-            .As<IMusicBeeApi>()
-            .SingleInstance();
+            .Register(_ => musicBeeApiMemoryContainer)
+            .AsSelf();
+
+        builder.RegisterMusicBeeApi();
     }
 
     public static void RegisterMusicBeeApi(this ContainerBuilder builder)
