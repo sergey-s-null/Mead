@@ -1,0 +1,200 @@
+<#@ template language="C#" #>
+<#@ assembly name="$(SolutionDir)\Mead.MusicBee.MetaInfo\bin\Debug\net472\Mead.MusicBee.MetaInfo.dll"#>
+<#@ assembly name="$(SolutionDir)\Mead.MusicBee\bin\Debug\net472\Mead.MusicBee.dll"#>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="Mead.MusicBee.MetaInfo.Enums" #>
+<#@ import namespace="Mead.MusicBee.MetaInfo.Extensions" #>
+<#@ import namespace="Mead.MusicBee.MetaInfo.Helpers" #>
+<#
+    var fieldsInfo = FieldsInfoProvider.GetFieldsInfo();
+#>
+using Mead.MusicBee.Api.Services.Abstract;
+using Mead.MusicBee.Enums;
+using Mead.MusicBee.LibraryApi.Entities.Abstract;
+using Mead.MusicBee.LibraryApi.Enums;
+using Mead.MusicBee.LibraryApi.Extensions;
+using Mead.MusicBee.LibraryApi.Factories.Abstract;
+using Mead.MusicBee.LibraryApi.Services.Abstract;
+
+namespace Mead.MusicBee.LibraryApi.Entities;
+
+public sealed class MusicFile : IMusicFile
+{
+    public string Path { get; }
+<#
+    foreach (var fieldInfo in fieldsInfo)
+    {
+        var propertyType = fieldInfo.FieldType.GetCSharpType(false);
+        var metaDataType = fieldInfo.MetaDataType.ToString();
+        if (fieldInfo.FieldType != FieldType.Variant)
+        {
+            var getterMethodName = GetGetterMethodName(fieldInfo.FieldType);
+            var setterMethodName = GetSetterMethodName(fieldInfo.FieldType);
+#>
+
+    public <#= propertyType #> <#= metaDataType #>
+    {
+        get => <#= getterMethodName #>(MetaDataType.<#= metaDataType #>);
+        set => <#= setterMethodName #>(MetaDataType.<#= metaDataType #>, value);
+    }
+<#
+        }
+        else
+        {
+#>
+
+    public <#= propertyType #> <#= metaDataType #> { get; }
+<#
+        }
+    }
+#>
+
+    private readonly IMusicBeeApi _musicBeeApi;
+    private readonly ReadOnlyMusicFileFactory _readOnlyMusicFileFactory;
+    private readonly IFieldValuesConverter _fieldValuesConverter;
+
+    private readonly IDictionary<MetaDataType, string> _changedTagValues;
+    private IReadOnlyMusicFile _musicFileSnapshot;
+
+    public MusicFile(
+        string filePath,
+        IMusicBeeApi musicBeeApi,
+        ReadOnlyMusicFileFactory readOnlyMusicFileFactory,
+        IFieldValuesConverter fieldValuesConverter,
+        VariantFieldFactory variantFieldFactory)
+    {
+        _musicBeeApi = musicBeeApi;
+        _readOnlyMusicFileFactory = readOnlyMusicFileFactory;
+        _fieldValuesConverter = fieldValuesConverter;
+
+        Path = filePath;
+
+<#
+    foreach (var fieldInfo in fieldsInfo.Where(x => x.FieldType == FieldType.Variant))
+    {
+        var metaDataType = fieldInfo.MetaDataType.ToString();
+#>
+        <#= metaDataType #> = variantFieldFactory(() => GetTagValue(MetaDataType.<#= metaDataType #>), x => SetTagValue(MetaDataType.<#= metaDataType #>, x));
+<#
+    }
+#>
+
+        _changedTagValues = new Dictionary<MetaDataType, string>();
+        _musicFileSnapshot = _readOnlyMusicFileFactory(Path);
+    }
+
+    public string GetTagValue(MetaDataType metaDataType)
+    {
+        return _changedTagValues.TryGetValue(metaDataType, out var value)
+            ? value
+            : _musicFileSnapshot.GetTagValue(metaDataType);
+    }
+
+    public void SetTagValue(MetaDataType metaDataType, string value)
+    {
+        if (value == _musicFileSnapshot.GetTagValue(metaDataType))
+        {
+            _changedTagValues.Remove(metaDataType);
+        }
+        else
+        {
+            _changedTagValues[metaDataType] = value;
+        }
+    }
+
+    public void Restore()
+    {
+        _changedTagValues.Clear();
+    }
+
+    public void Save()
+    {
+        foreach (var (metaDataType, value) in _changedTagValues)
+        {
+            _musicBeeApi.Library_SetFileTag(Path, metaDataType, value);
+        }
+
+        _musicBeeApi.Library_CommitTagsToFile(Path);
+
+        _musicFileSnapshot = _readOnlyMusicFileFactory(Path);
+    }
+
+    private bool GetBoolTagValue(MetaDataType metaDataType)
+    {
+        return _fieldValuesConverter.ConvertStringToBool(GetTagValue(metaDataType));
+    }
+
+    private void SetBoolTagValue(MetaDataType metaDataType, bool value)
+    {
+        SetTagValue(metaDataType, _fieldValuesConverter.ConvertBoolToString(value));
+    }
+
+    private long GetNumberTagValue(MetaDataType metaDataType)
+    {
+        return _fieldValuesConverter.ConvertStringToNumber(GetTagValue(metaDataType));
+    }
+
+    private void SetNumberTagValue(MetaDataType metaDataType, long value)
+    {
+        SetTagValue(metaDataType, _fieldValuesConverter.ConvertNumberToString(value));
+    }
+
+    private DateTime GetDateTagValue(MetaDataType metaDataType)
+    {
+        return _fieldValuesConverter.ConvertStringToDate(GetTagValue(metaDataType));
+    }
+
+    private void SetDateTagValue(MetaDataType metaDataType, DateTime value)
+    {
+        SetTagValue(metaDataType, _fieldValuesConverter.ConvertDateToString(value));
+    }
+
+    private IReadOnlyList<string> GetEnumTagValue(MetaDataType metaDataType)
+    {
+        return _fieldValuesConverter.ConvertStringToEnum(GetTagValue(metaDataType));
+    }
+
+    private void SetEnumTagValue(MetaDataType metaDataType, IReadOnlyList<string> value)
+    {
+        SetTagValue(metaDataType, _fieldValuesConverter.ConvertEnumToString(value));
+    }
+
+    private Rating GetRatingTagValue(MetaDataType metaDataType)
+    {
+        return _fieldValuesConverter.ConvertStringToRating(GetTagValue(metaDataType));
+    }
+
+    private void SetRatingTagValue(MetaDataType metaDataType, Rating value)
+    {
+        SetTagValue(metaDataType, _fieldValuesConverter.ConvertRatingToString(value));
+    }
+}
+<#+
+    private static string GetGetterMethodName(FieldType fieldType)
+    {
+        return fieldType switch {
+            FieldType.String => "GetTagValue",
+            FieldType.Bool => "GetBoolTagValue",
+            FieldType.Number => "GetNumberTagValue",
+            FieldType.Date => "GetDateTagValue",
+            FieldType.Enum => "GetEnumTagValue",
+            FieldType.Rating => "GetRatingTagValue",
+            FieldType.Variant => throw new NotSupportedException(),
+            _ => throw new ArgumentOutOfRangeException(nameof(fieldType), fieldType, null)
+            };
+    }
+
+    private static string GetSetterMethodName(FieldType fieldType)
+    {
+        return fieldType switch {
+            FieldType.String => "SetTagValue",
+            FieldType.Bool => "SetBoolTagValue",
+            FieldType.Number => "SetNumberTagValue",
+            FieldType.Date => "SetDateTagValue",
+            FieldType.Enum => "SetEnumTagValue",
+            FieldType.Rating => "SetRatingTagValue",
+            FieldType.Variant => throw new NotSupportedException(),
+            _ => throw new ArgumentOutOfRangeException(nameof(fieldType), fieldType, null)
+            };
+    }
+#>
