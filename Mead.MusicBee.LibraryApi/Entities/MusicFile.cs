@@ -432,7 +432,7 @@ public sealed class MusicFile : IMusicFile
     private IReadOnlyMusicFile _musicFileSnapshot;
 
     public MusicFile(
-        string filePath,
+        string path,
         IMusicBeeApi musicBeeApi,
         ReadOnlyMusicFileFactory readOnlyMusicFileFactory,
         IFieldValuesConverter fieldValuesConverter,
@@ -442,7 +442,7 @@ public sealed class MusicFile : IMusicFile
         _readOnlyMusicFileFactory = readOnlyMusicFileFactory;
         _fieldValuesConverter = fieldValuesConverter;
 
-        Path = filePath;
+        Path = path;
 
         Custom1 = variantFieldFactory(() => GetTagValue(MetaDataType.Custom1), x => SetTagValue(MetaDataType.Custom1, x));
         Custom2 = variantFieldFactory(() => GetTagValue(MetaDataType.Custom2), x => SetTagValue(MetaDataType.Custom2, x));

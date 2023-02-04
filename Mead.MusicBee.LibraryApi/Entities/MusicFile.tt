@@ -57,7 +57,7 @@ public sealed class MusicFile : IMusicFile
     private IReadOnlyMusicFile _musicFileSnapshot;
 
     public MusicFile(
-        string filePath,
+        string path,
         IMusicBeeApi musicBeeApi,
         ReadOnlyMusicFileFactory readOnlyMusicFileFactory,
         IFieldValuesConverter fieldValuesConverter,
@@ -67,7 +67,7 @@ public sealed class MusicFile : IMusicFile
         _readOnlyMusicFileFactory = readOnlyMusicFileFactory;
         _fieldValuesConverter = fieldValuesConverter;
 
-        Path = filePath;
+        Path = path;
 
 <#
     foreach (var fieldInfo in fieldsInfo.Where(x => x.FieldType == FieldType.Variant))
