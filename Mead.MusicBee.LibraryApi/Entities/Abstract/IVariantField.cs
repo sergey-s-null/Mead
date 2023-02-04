@@ -1,4 +1,6 @@
-﻿namespace Mead.MusicBee.LibraryApi.Entities.Abstract;
+﻿using Mead.MusicBee.LibraryApi.Enums;
+
+namespace Mead.MusicBee.LibraryApi.Entities.Abstract;
 
 public interface IVariantField
 {

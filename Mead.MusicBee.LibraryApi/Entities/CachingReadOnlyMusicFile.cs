@@ -1,6 +1,7 @@
 ﻿using Mead.MusicBee.Api.Services.Abstract;
 using Mead.MusicBee.Enums;
 using Mead.MusicBee.LibraryApi.Entities.Abstract;
+using Mead.MusicBee.LibraryApi.Enums;
 using Mead.MusicBee.LibraryApi.Factories.Abstract;
 using Mead.MusicBee.LibraryApi.Services.Abstract;
 

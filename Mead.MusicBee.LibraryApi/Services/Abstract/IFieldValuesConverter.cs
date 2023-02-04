@@ -1,4 +1,6 @@
-﻿namespace Mead.MusicBee.LibraryApi.Services.Abstract;
+﻿using Mead.MusicBee.LibraryApi.Enums;
+
+namespace Mead.MusicBee.LibraryApi.Services.Abstract;
 
 public interface IFieldValuesConverter
 {
