@@ -12,4 +12,51 @@
 	  <Reference Include="System.Net.Http" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Update="Entities\Abstract\IMusicFile.tt">
+	    <Generator>TextTemplatingFileGenerator</Generator>
+	    <LastGenOutput>IMusicFile.cs</LastGenOutput>
+	  </None>
+	  <None Update="Entities\Abstract\IReadOnlyMusicFile.tt">
+	    <Generator>TextTemplatingFileGenerator</Generator>
+	    <LastGenOutput>IReadOnlyMusicFile.cs</LastGenOutput>
+	  </None>
+	  <None Update="Entities\CachingReadOnlyMusicFile.tt">
+	    <Generator>TextTemplatingFileGenerator</Generator>
+	    <LastGenOutput>CachingReadOnlyMusicFile.cs</LastGenOutput>
+	  </None>
+	  <None Update="Entities\MusicFile.tt">
+	    <Generator>TextTemplatingFileGenerator</Generator>
+	    <LastGenOutput>MusicFile.cs</LastGenOutput>
+	  </None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Entities\Abstract\IMusicFile.cs">
+	    <AutoGen>True</AutoGen>
+	    <DesignTime>True</DesignTime>
+	    <DependentUpon>IMusicFile.tt</DependentUpon>
+	  </Compile>
+	  <Compile Update="Entities\Abstract\IReadOnlyMusicFile.cs">
+	    <AutoGen>True</AutoGen>
+	    <DesignTime>True</DesignTime>
+	    <DependentUpon>IReadOnlyMusicFile.tt</DependentUpon>
+	  </Compile>
+	  <Compile Update="Entities\CachingReadOnlyMusicFile.cs">
+	    <AutoGen>True</AutoGen>
+	    <DesignTime>True</DesignTime>
+	    <DependentUpon>CachingReadOnlyMusicFile.tt</DependentUpon>
+	  </Compile>
+	  <Compile Update="Entities\MusicFile.cs">
+	    <AutoGen>True</AutoGen>
+	    <DesignTime>True</DesignTime>
+	    <DependentUpon>MusicFile.tt</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Mead.MusicBee.Api\Mead.MusicBee.Api.csproj" />
+	  <ProjectReference Include="..\Mead.MusicBee\Mead.MusicBee.csproj" />
+	</ItemGroup>
+
 </Project>

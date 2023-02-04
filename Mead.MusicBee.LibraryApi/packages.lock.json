@@ -1,6 +1,16 @@
 {
   "version": 1,
   "dependencies": {
-    ".NETFramework,Version=v4.7.2": {}
+    ".NETFramework,Version=v4.7.2": {
+      "mead.musicbee": {
+        "type": "Project"
+      },
+      "mead.musicbee.api": {
+        "type": "Project",
+        "dependencies": {
+          "Mead.MusicBee": "[1.1.1, )"
+        }
+      }
+    }
   }
 }
