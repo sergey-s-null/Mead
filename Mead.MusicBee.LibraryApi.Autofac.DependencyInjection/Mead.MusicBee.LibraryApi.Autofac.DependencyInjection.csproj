@@ -12,4 +12,12 @@
 	  <Reference Include="System.Net.Http" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <PackageReference Include="Autofac" Version="6.5.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Mead.MusicBee.LibraryApi\Mead.MusicBee.LibraryApi.csproj" />
+	</ItemGroup>
+
 </Project>
