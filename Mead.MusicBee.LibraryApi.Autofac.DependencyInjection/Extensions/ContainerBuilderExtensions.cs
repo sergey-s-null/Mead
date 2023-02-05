@@ -1,6 +1,8 @@
 ﻿using Autofac;
+using Mead.MusicBee.LibraryApi.Autofac.DependencyInjection.Enums;
 using Mead.MusicBee.LibraryApi.Entities;
 using Mead.MusicBee.LibraryApi.Entities.Abstract;
+using Mead.MusicBee.LibraryApi.Enums;
 using Mead.MusicBee.LibraryApi.Services;
 using Mead.MusicBee.LibraryApi.Services.Abstract;
 
@@ -29,8 +31,34 @@ public static class ContainerBuilderExtensions
             .As<IVariantField>();
 
         containerBuilder
-            .RegisterType<FieldValuesConverter>()
-            .As<IFieldValuesConverter>()
+            .RegisterType<BoolFieldValueConverter>()
+            .As<IFieldValueConverter<bool>>()
+            .SingleInstance();
+        containerBuilder
+            .RegisterType<NumberFieldValueConverter>()
+            .As<IFieldValueConverter<long>>()
+            .SingleInstance();
+        containerBuilder
+            .RegisterType<DateFieldValueConverter>()
+            .As<IFieldValueConverter<DateTime>>()
+            .SingleInstance();
+        containerBuilder
+            .RegisterType<EnumFieldValueConverter>()
+            .As<IFieldValueConverter<IReadOnlyList<string>>>()
+            .Keyed<EnumType>(EnumType.Normal)
+            .SingleInstance();
+        containerBuilder
+            .RegisterType<EncodedEnumFieldValueConverter>()
+            .As<IFieldValueConverter<IReadOnlyList<string>>>()
+            .Keyed<EnumType>(EnumType.Encoded)
+            .SingleInstance();
+        containerBuilder
+            .RegisterType<RatingFieldValueConverter>()
+            .As<IFieldValueConverter<Rating>>()
+            .SingleInstance();
+        containerBuilder
+            .RegisterType<LoveBanRatingFieldValueConverter>()
+            .As<IFieldValueConverter<LoveBanRating>>()
             .SingleInstance();
     }
 }
