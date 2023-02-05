@@ -21,6 +21,8 @@ namespace Mead.MusicBee.LibraryApi.Entities;
 public sealed class MusicFile : IMusicFile
 {
     public string Path { get; }
+
+    #region Fields
 <#
     foreach (var fieldInfo in fieldsInfo)
     {
@@ -48,6 +50,8 @@ public sealed class MusicFile : IMusicFile
         }
     }
 #>
+
+    #endregion
 
     private readonly IMusicBeeApi _musicBeeApi;
     private readonly ReadOnlyMusicFileFactory _readOnlyMusicFileFactory;
@@ -87,15 +91,22 @@ public sealed class MusicFile : IMusicFile
 
         Path = path;
 
+        #region Variant fields creation
+
 <#
     foreach (var fieldInfo in fieldsInfo.Where(x => x.FieldType == FieldType.Variant))
     {
         var metaDataType = fieldInfo.MetaDataType.ToString();
 #>
-        <#= metaDataType #> = variantFieldFactory(() => GetTagValue(MetaDataType.<#= metaDataType #>), x => SetTagValue(MetaDataType.<#= metaDataType #>, x));
+        <#= metaDataType #> = variantFieldFactory(
+            () => GetTagValue(MetaDataType.<#= metaDataType #>),
+            x => SetTagValue(MetaDataType.<#= metaDataType #>, x)
+        );
 <#
     }
 #>
+
+        #endregion
 
         _changedTagValues = new Dictionary<MetaDataType, string>();
         _musicFileSnapshot = _readOnlyMusicFileFactory(Path);

@@ -11,6 +11,8 @@ public sealed class CachingReadOnlyMusicFile : IReadOnlyMusicFile
 {
     public string Path { get; }
 
+    #region Fields
+
     public string TrackTitle => GetTagValue(MetaDataType.TrackTitle);
     public string Album => GetTagValue(MetaDataType.Album);
     public string AlbumArtist => GetTagValue(MetaDataType.AlbumArtist);
@@ -108,6 +110,8 @@ public sealed class CachingReadOnlyMusicFile : IReadOnlyMusicFile
     public DateTime OriginalYear => GetDateTagValue(MetaDataType.OriginalYear);
     public string OriginalTitle => GetTagValue(MetaDataType.OriginalTitle);
 
+    #endregion
+
     private readonly IMusicBeeApi _musicBeeApi;
     private readonly IFieldValueConverter<bool> _boolFieldValueConverter;
     private readonly IFieldValueConverter<long> _numberFieldValueConverter;
@@ -139,6 +143,8 @@ public sealed class CachingReadOnlyMusicFile : IReadOnlyMusicFile
         _encodedEnumFieldValueConverter = encodedEnumFieldValueConverter;
         _ratingFieldValueConverter = ratingFieldValueConverter;
         _loveBanRatingFieldValueConverter = loveBanRatingFieldValueConverter;
+
+        #region Custom fields creation
 
         Custom1 = readOnlyVariantFieldFactory(() => GetTagValue(MetaDataType.Custom1));
         Custom2 = readOnlyVariantFieldFactory(() => GetTagValue(MetaDataType.Custom2));
@@ -181,6 +187,8 @@ public sealed class CachingReadOnlyMusicFile : IReadOnlyMusicFile
         Virtual23 = readOnlyVariantFieldFactory(() => GetTagValue(MetaDataType.Virtual23));
         Virtual24 = readOnlyVariantFieldFactory(() => GetTagValue(MetaDataType.Virtual24));
         Virtual25 = readOnlyVariantFieldFactory(() => GetTagValue(MetaDataType.Virtual25));
+
+        #endregion
 
         _cachedTagValues = new Dictionary<MetaDataType, string>();
 

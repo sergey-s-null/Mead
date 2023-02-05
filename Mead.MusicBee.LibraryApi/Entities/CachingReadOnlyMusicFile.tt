@@ -21,6 +21,8 @@ public sealed class CachingReadOnlyMusicFile : IReadOnlyMusicFile
 {
     public string Path { get; }
 
+    #region Fields
+
 <#
     foreach (var fieldInfo in fieldsInfo)
     {
@@ -34,6 +36,8 @@ public sealed class CachingReadOnlyMusicFile : IReadOnlyMusicFile
 <#
     }
 #>
+
+    #endregion
 
     private readonly IMusicBeeApi _musicBeeApi;
     private readonly IFieldValueConverter<bool> _boolFieldValueConverter;
@@ -67,6 +71,8 @@ public sealed class CachingReadOnlyMusicFile : IReadOnlyMusicFile
         _ratingFieldValueConverter = ratingFieldValueConverter;
         _loveBanRatingFieldValueConverter = loveBanRatingFieldValueConverter;
 
+        #region Custom fields creation
+
 <#
     foreach (var fieldInfo in fieldsInfo.Where(x => x.FieldType == FieldType.Variant))
     {
@@ -76,6 +82,8 @@ public sealed class CachingReadOnlyMusicFile : IReadOnlyMusicFile
 <#
     }
 #>
+
+        #endregion
 
         _cachedTagValues = new Dictionary<MetaDataType, string>();
 

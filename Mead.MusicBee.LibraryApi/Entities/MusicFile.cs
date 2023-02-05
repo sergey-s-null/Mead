@@ -12,6 +12,8 @@ public sealed class MusicFile : IMusicFile
 {
     public string Path { get; }
 
+    #region Fields
+
     public string TrackTitle
     {
         get => GetTagValue(MetaDataType.TrackTitle);
@@ -424,6 +426,8 @@ public sealed class MusicFile : IMusicFile
         set => SetTagValue(MetaDataType.OriginalTitle, value);
     }
 
+    #endregion
+
     private readonly IMusicBeeApi _musicBeeApi;
     private readonly ReadOnlyMusicFileFactory _readOnlyMusicFileFactory;
     private readonly IFieldValueConverter<bool> _boolFieldValueConverter;
@@ -462,47 +466,174 @@ public sealed class MusicFile : IMusicFile
 
         Path = path;
 
-        Custom1 = variantFieldFactory(() => GetTagValue(MetaDataType.Custom1), x => SetTagValue(MetaDataType.Custom1, x));
-        Custom2 = variantFieldFactory(() => GetTagValue(MetaDataType.Custom2), x => SetTagValue(MetaDataType.Custom2, x));
-        Custom3 = variantFieldFactory(() => GetTagValue(MetaDataType.Custom3), x => SetTagValue(MetaDataType.Custom3, x));
-        Custom4 = variantFieldFactory(() => GetTagValue(MetaDataType.Custom4), x => SetTagValue(MetaDataType.Custom4, x));
-        Custom5 = variantFieldFactory(() => GetTagValue(MetaDataType.Custom5), x => SetTagValue(MetaDataType.Custom5, x));
-        Custom6 = variantFieldFactory(() => GetTagValue(MetaDataType.Custom6), x => SetTagValue(MetaDataType.Custom6, x));
-        Custom7 = variantFieldFactory(() => GetTagValue(MetaDataType.Custom7), x => SetTagValue(MetaDataType.Custom7, x));
-        Custom8 = variantFieldFactory(() => GetTagValue(MetaDataType.Custom8), x => SetTagValue(MetaDataType.Custom8, x));
-        Custom9 = variantFieldFactory(() => GetTagValue(MetaDataType.Custom9), x => SetTagValue(MetaDataType.Custom9, x));
-        Custom10 = variantFieldFactory(() => GetTagValue(MetaDataType.Custom10), x => SetTagValue(MetaDataType.Custom10, x));
-        Custom11 = variantFieldFactory(() => GetTagValue(MetaDataType.Custom11), x => SetTagValue(MetaDataType.Custom11, x));
-        Custom12 = variantFieldFactory(() => GetTagValue(MetaDataType.Custom12), x => SetTagValue(MetaDataType.Custom12, x));
-        Custom13 = variantFieldFactory(() => GetTagValue(MetaDataType.Custom13), x => SetTagValue(MetaDataType.Custom13, x));
-        Custom14 = variantFieldFactory(() => GetTagValue(MetaDataType.Custom14), x => SetTagValue(MetaDataType.Custom14, x));
-        Custom15 = variantFieldFactory(() => GetTagValue(MetaDataType.Custom15), x => SetTagValue(MetaDataType.Custom15, x));
-        Custom16 = variantFieldFactory(() => GetTagValue(MetaDataType.Custom16), x => SetTagValue(MetaDataType.Custom16, x));
-        Virtual1 = variantFieldFactory(() => GetTagValue(MetaDataType.Virtual1), x => SetTagValue(MetaDataType.Virtual1, x));
-        Virtual2 = variantFieldFactory(() => GetTagValue(MetaDataType.Virtual2), x => SetTagValue(MetaDataType.Virtual2, x));
-        Virtual3 = variantFieldFactory(() => GetTagValue(MetaDataType.Virtual3), x => SetTagValue(MetaDataType.Virtual3, x));
-        Virtual4 = variantFieldFactory(() => GetTagValue(MetaDataType.Virtual4), x => SetTagValue(MetaDataType.Virtual4, x));
-        Virtual5 = variantFieldFactory(() => GetTagValue(MetaDataType.Virtual5), x => SetTagValue(MetaDataType.Virtual5, x));
-        Virtual6 = variantFieldFactory(() => GetTagValue(MetaDataType.Virtual6), x => SetTagValue(MetaDataType.Virtual6, x));
-        Virtual7 = variantFieldFactory(() => GetTagValue(MetaDataType.Virtual7), x => SetTagValue(MetaDataType.Virtual7, x));
-        Virtual8 = variantFieldFactory(() => GetTagValue(MetaDataType.Virtual8), x => SetTagValue(MetaDataType.Virtual8, x));
-        Virtual9 = variantFieldFactory(() => GetTagValue(MetaDataType.Virtual9), x => SetTagValue(MetaDataType.Virtual9, x));
-        Virtual10 = variantFieldFactory(() => GetTagValue(MetaDataType.Virtual10), x => SetTagValue(MetaDataType.Virtual10, x));
-        Virtual11 = variantFieldFactory(() => GetTagValue(MetaDataType.Virtual11), x => SetTagValue(MetaDataType.Virtual11, x));
-        Virtual12 = variantFieldFactory(() => GetTagValue(MetaDataType.Virtual12), x => SetTagValue(MetaDataType.Virtual12, x));
-        Virtual13 = variantFieldFactory(() => GetTagValue(MetaDataType.Virtual13), x => SetTagValue(MetaDataType.Virtual13, x));
-        Virtual14 = variantFieldFactory(() => GetTagValue(MetaDataType.Virtual14), x => SetTagValue(MetaDataType.Virtual14, x));
-        Virtual15 = variantFieldFactory(() => GetTagValue(MetaDataType.Virtual15), x => SetTagValue(MetaDataType.Virtual15, x));
-        Virtual16 = variantFieldFactory(() => GetTagValue(MetaDataType.Virtual16), x => SetTagValue(MetaDataType.Virtual16, x));
-        Virtual17 = variantFieldFactory(() => GetTagValue(MetaDataType.Virtual17), x => SetTagValue(MetaDataType.Virtual17, x));
-        Virtual18 = variantFieldFactory(() => GetTagValue(MetaDataType.Virtual18), x => SetTagValue(MetaDataType.Virtual18, x));
-        Virtual19 = variantFieldFactory(() => GetTagValue(MetaDataType.Virtual19), x => SetTagValue(MetaDataType.Virtual19, x));
-        Virtual20 = variantFieldFactory(() => GetTagValue(MetaDataType.Virtual20), x => SetTagValue(MetaDataType.Virtual20, x));
-        Virtual21 = variantFieldFactory(() => GetTagValue(MetaDataType.Virtual21), x => SetTagValue(MetaDataType.Virtual21, x));
-        Virtual22 = variantFieldFactory(() => GetTagValue(MetaDataType.Virtual22), x => SetTagValue(MetaDataType.Virtual22, x));
-        Virtual23 = variantFieldFactory(() => GetTagValue(MetaDataType.Virtual23), x => SetTagValue(MetaDataType.Virtual23, x));
-        Virtual24 = variantFieldFactory(() => GetTagValue(MetaDataType.Virtual24), x => SetTagValue(MetaDataType.Virtual24, x));
-        Virtual25 = variantFieldFactory(() => GetTagValue(MetaDataType.Virtual25), x => SetTagValue(MetaDataType.Virtual25, x));
+        #region Variant fields creation
+
+        Custom1 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Custom1),
+            x => SetTagValue(MetaDataType.Custom1, x)
+        );
+        Custom2 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Custom2),
+            x => SetTagValue(MetaDataType.Custom2, x)
+        );
+        Custom3 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Custom3),
+            x => SetTagValue(MetaDataType.Custom3, x)
+        );
+        Custom4 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Custom4),
+            x => SetTagValue(MetaDataType.Custom4, x)
+        );
+        Custom5 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Custom5),
+            x => SetTagValue(MetaDataType.Custom5, x)
+        );
+        Custom6 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Custom6),
+            x => SetTagValue(MetaDataType.Custom6, x)
+        );
+        Custom7 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Custom7),
+            x => SetTagValue(MetaDataType.Custom7, x)
+        );
+        Custom8 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Custom8),
+            x => SetTagValue(MetaDataType.Custom8, x)
+        );
+        Custom9 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Custom9),
+            x => SetTagValue(MetaDataType.Custom9, x)
+        );
+        Custom10 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Custom10),
+            x => SetTagValue(MetaDataType.Custom10, x)
+        );
+        Custom11 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Custom11),
+            x => SetTagValue(MetaDataType.Custom11, x)
+        );
+        Custom12 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Custom12),
+            x => SetTagValue(MetaDataType.Custom12, x)
+        );
+        Custom13 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Custom13),
+            x => SetTagValue(MetaDataType.Custom13, x)
+        );
+        Custom14 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Custom14),
+            x => SetTagValue(MetaDataType.Custom14, x)
+        );
+        Custom15 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Custom15),
+            x => SetTagValue(MetaDataType.Custom15, x)
+        );
+        Custom16 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Custom16),
+            x => SetTagValue(MetaDataType.Custom16, x)
+        );
+        Virtual1 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Virtual1),
+            x => SetTagValue(MetaDataType.Virtual1, x)
+        );
+        Virtual2 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Virtual2),
+            x => SetTagValue(MetaDataType.Virtual2, x)
+        );
+        Virtual3 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Virtual3),
+            x => SetTagValue(MetaDataType.Virtual3, x)
+        );
+        Virtual4 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Virtual4),
+            x => SetTagValue(MetaDataType.Virtual4, x)
+        );
+        Virtual5 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Virtual5),
+            x => SetTagValue(MetaDataType.Virtual5, x)
+        );
+        Virtual6 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Virtual6),
+            x => SetTagValue(MetaDataType.Virtual6, x)
+        );
+        Virtual7 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Virtual7),
+            x => SetTagValue(MetaDataType.Virtual7, x)
+        );
+        Virtual8 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Virtual8),
+            x => SetTagValue(MetaDataType.Virtual8, x)
+        );
+        Virtual9 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Virtual9),
+            x => SetTagValue(MetaDataType.Virtual9, x)
+        );
+        Virtual10 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Virtual10),
+            x => SetTagValue(MetaDataType.Virtual10, x)
+        );
+        Virtual11 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Virtual11),
+            x => SetTagValue(MetaDataType.Virtual11, x)
+        );
+        Virtual12 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Virtual12),
+            x => SetTagValue(MetaDataType.Virtual12, x)
+        );
+        Virtual13 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Virtual13),
+            x => SetTagValue(MetaDataType.Virtual13, x)
+        );
+        Virtual14 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Virtual14),
+            x => SetTagValue(MetaDataType.Virtual14, x)
+        );
+        Virtual15 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Virtual15),
+            x => SetTagValue(MetaDataType.Virtual15, x)
+        );
+        Virtual16 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Virtual16),
+            x => SetTagValue(MetaDataType.Virtual16, x)
+        );
+        Virtual17 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Virtual17),
+            x => SetTagValue(MetaDataType.Virtual17, x)
+        );
+        Virtual18 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Virtual18),
+            x => SetTagValue(MetaDataType.Virtual18, x)
+        );
+        Virtual19 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Virtual19),
+            x => SetTagValue(MetaDataType.Virtual19, x)
+        );
+        Virtual20 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Virtual20),
+            x => SetTagValue(MetaDataType.Virtual20, x)
+        );
+        Virtual21 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Virtual21),
+            x => SetTagValue(MetaDataType.Virtual21, x)
+        );
+        Virtual22 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Virtual22),
+            x => SetTagValue(MetaDataType.Virtual22, x)
+        );
+        Virtual23 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Virtual23),
+            x => SetTagValue(MetaDataType.Virtual23, x)
+        );
+        Virtual24 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Virtual24),
+            x => SetTagValue(MetaDataType.Virtual24, x)
+        );
+        Virtual25 = variantFieldFactory(
+            () => GetTagValue(MetaDataType.Virtual25),
+            x => SetTagValue(MetaDataType.Virtual25, x)
+        );
+
+        #endregion
 
         _changedTagValues = new Dictionary<MetaDataType, string>();
         _musicFileSnapshot = _readOnlyMusicFileFactory(Path);
