@@ -12,9 +12,9 @@ public interface IReadOnlyMusicFile
     string AlbumArtist { get; }
     string AlbumArtistRaw { get; }
     string Artist { get; }
-    string MultiArtist { get; }
+    IReadOnlyList<string> MultiArtist { get; }
     string PrimaryArtist { get; }
-    string Artists { get; }
+    IReadOnlyList<string> Artists { get; }
     string ArtistsWithArtistRole { get; }
     string ArtistsWithPerformerRole { get; }
     string ArtistsWithGuestRole { get; }
@@ -22,7 +22,7 @@ public interface IReadOnlyMusicFile
     string Artwork { get; }
     long BeatsPerMin { get; }
     string Composer { get; }
-    string MultiComposer { get; }
+    IReadOnlyList<string> MultiComposer { get; }
     string Comment { get; }
     string Conductor { get; }
     IReadOnlyVariantField Custom1 { get; }
@@ -44,8 +44,8 @@ public interface IReadOnlyMusicFile
     long DiscNo { get; }
     long DiscCount { get; }
     string Encoder { get; }
-    string Genre { get; }
-    string Genres { get; }
+    IReadOnlyList<string> Genre { get; }
+    IReadOnlyList<string> Genres { get; }
     IReadOnlyList<string> GenreCategory { get; }
     IReadOnlyList<string> Grouping { get; }
     IReadOnlyList<string> Keywords { get; }
@@ -58,7 +58,7 @@ public interface IReadOnlyMusicFile
     string Publisher { get; }
     IReadOnlyList<string> Quality { get; }
     Rating Rating { get; }
-    string RatingLove { get; }
+    LoveBanRating RatingLove { get; }
     Rating RatingAlbum { get; }
     IReadOnlyList<string> Tempo { get; }
     long TrackNo { get; }
@@ -98,7 +98,7 @@ public interface IReadOnlyMusicFile
     string MovementName { get; }
     long MovementNo { get; }
     long MovementCount { get; }
-    string ShowMovement { get; }
+    bool ShowMovement { get; }
     string Language { get; }
     string OriginalArtist { get; }
     DateTime OriginalYear { get; }

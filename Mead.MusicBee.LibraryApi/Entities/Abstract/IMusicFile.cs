@@ -12,9 +12,9 @@ public interface IMusicFile
     string AlbumArtist { get; set; }
     string AlbumArtistRaw { get; set; }
     string Artist { get; set; }
-    string MultiArtist { get; set; }
+    IReadOnlyList<string> MultiArtist { get; set; }
     string PrimaryArtist { get; set; }
-    string Artists { get; set; }
+    IReadOnlyList<string> Artists { get; set; }
     string ArtistsWithArtistRole { get; set; }
     string ArtistsWithPerformerRole { get; set; }
     string ArtistsWithGuestRole { get; set; }
@@ -22,7 +22,7 @@ public interface IMusicFile
     string Artwork { get; set; }
     long BeatsPerMin { get; set; }
     string Composer { get; set; }
-    string MultiComposer { get; set; }
+    IReadOnlyList<string> MultiComposer { get; set; }
     string Comment { get; set; }
     string Conductor { get; set; }
     IVariantField Custom1 { get; }
@@ -44,8 +44,8 @@ public interface IMusicFile
     long DiscNo { get; set; }
     long DiscCount { get; set; }
     string Encoder { get; set; }
-    string Genre { get; set; }
-    string Genres { get; set; }
+    IReadOnlyList<string> Genre { get; set; }
+    IReadOnlyList<string> Genres { get; set; }
     IReadOnlyList<string> GenreCategory { get; set; }
     IReadOnlyList<string> Grouping { get; set; }
     IReadOnlyList<string> Keywords { get; set; }
@@ -58,7 +58,7 @@ public interface IMusicFile
     string Publisher { get; set; }
     IReadOnlyList<string> Quality { get; set; }
     Rating Rating { get; set; }
-    string RatingLove { get; set; }
+    LoveBanRating RatingLove { get; set; }
     Rating RatingAlbum { get; set; }
     IReadOnlyList<string> Tempo { get; set; }
     long TrackNo { get; set; }
@@ -98,7 +98,7 @@ public interface IMusicFile
     string MovementName { get; set; }
     long MovementNo { get; set; }
     long MovementCount { get; set; }
-    string ShowMovement { get; set; }
+    bool ShowMovement { get; set; }
     string Language { get; set; }
     string OriginalArtist { get; set; }
     DateTime OriginalYear { get; set; }

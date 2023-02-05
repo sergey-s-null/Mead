@@ -59,7 +59,7 @@ public static class FieldsInfoProvider
         new MusicFileFieldInfo(MetaDataType.Publisher, FieldType.String),
         new MusicFileFieldInfo(MetaDataType.Quality, FieldType.Enum),
         new MusicFileFieldInfo(MetaDataType.Rating, FieldType.Rating),
-        new MusicFileFieldInfo(MetaDataType.RatingLove, FieldType.RatingLoveBan),
+        new MusicFileFieldInfo(MetaDataType.RatingLove, FieldType.LoveBanRating),
         new MusicFileFieldInfo(MetaDataType.RatingAlbum, FieldType.Rating),
         new MusicFileFieldInfo(MetaDataType.Tempo, FieldType.Enum),
         new MusicFileFieldInfo(MetaDataType.TrackNo, FieldType.Number),

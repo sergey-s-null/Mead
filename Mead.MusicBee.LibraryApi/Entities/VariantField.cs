@@ -14,45 +14,58 @@ public sealed class VariantField : IVariantField
 
     public bool BoolValue
     {
-        get => _fieldValuesConverter.ConvertStringToBool(_getTagValue());
-        set => _setTagValue(_fieldValuesConverter.ConvertBoolToString(value));
+        get => _boolFieldValueConverter.ConvertFromString(_getTagValue());
+        set => _setTagValue(_boolFieldValueConverter.ConvertToString(value));
     }
 
     public long NumberValue
     {
-        get => _fieldValuesConverter.ConvertStringToNumber(_getTagValue());
-        set => _setTagValue(_fieldValuesConverter.ConvertNumberToString(value));
+        get => _numberFieldValueConverter.ConvertFromString(_getTagValue());
+        set => _setTagValue(_numberFieldValueConverter.ConvertToString(value));
     }
 
     public DateTime DateValue
     {
-        get => _fieldValuesConverter.ConvertStringToDate(_getTagValue());
-        set => _setTagValue(_fieldValuesConverter.ConvertDateToString(value));
+        get => _dateFieldValueConverter.ConvertFromString(_getTagValue());
+        set => _setTagValue(_dateFieldValueConverter.ConvertToString(value));
     }
 
     public IReadOnlyList<string> EnumValue
     {
-        get => _fieldValuesConverter.ConvertStringToEnum(_getTagValue());
-        set => _setTagValue(_fieldValuesConverter.ConvertEnumToString(value));
+        get => _enumFieldValueConverter.ConvertFromString(_getTagValue());
+        set => _setTagValue(_enumFieldValueConverter.ConvertToString(value));
     }
 
     public Rating RatingValue
     {
-        get => _fieldValuesConverter.ConvertStringToRating(_getTagValue());
-        set => _setTagValue(_fieldValuesConverter.ConvertRatingToString(value));
+        get => _ratingFieldValueConverter.ConvertFromString(_getTagValue());
+        set => _setTagValue(_ratingFieldValueConverter.ConvertToString(value));
     }
 
     private readonly Func<string> _getTagValue;
     private readonly Action<string> _setTagValue;
-    private readonly IFieldValuesConverter _fieldValuesConverter;
+
+    private readonly IFieldValueConverter<bool> _boolFieldValueConverter;
+    private readonly IFieldValueConverter<long> _numberFieldValueConverter;
+    private readonly IFieldValueConverter<DateTime> _dateFieldValueConverter;
+    private readonly IFieldValueConverter<IReadOnlyList<string>> _enumFieldValueConverter;
+    private readonly IFieldValueConverter<Rating> _ratingFieldValueConverter;
 
     public VariantField(
         Func<string> getTagValue,
         Action<string> setTagValue,
-        IFieldValuesConverter fieldValuesConverter)
+        IFieldValueConverter<bool> boolFieldValueConverter,
+        IFieldValueConverter<long> numberFieldValueConverter,
+        IFieldValueConverter<DateTime> dateFieldValueConverter,
+        IFieldValueConverter<IReadOnlyList<string>> enumFieldValueConverter,
+        IFieldValueConverter<Rating> ratingFieldValueConverter)
     {
         _getTagValue = getTagValue;
         _setTagValue = setTagValue;
-        _fieldValuesConverter = fieldValuesConverter;
+        _boolFieldValueConverter = boolFieldValueConverter;
+        _numberFieldValueConverter = numberFieldValueConverter;
+        _dateFieldValueConverter = dateFieldValueConverter;
+        _enumFieldValueConverter = enumFieldValueConverter;
+        _ratingFieldValueConverter = ratingFieldValueConverter;
     }
 }

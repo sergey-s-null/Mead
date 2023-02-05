@@ -9,7 +9,7 @@ public enum FieldType
     Enum,
     EncodedEnum,
     Rating,
-    RatingLoveBan,
+    LoveBanRating,
 
     Variant
 }

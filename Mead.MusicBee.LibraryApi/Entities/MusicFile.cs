@@ -42,10 +42,10 @@ public sealed class MusicFile : IMusicFile
         set => SetTagValue(MetaDataType.Artist, value);
     }
 
-    public string MultiArtist
+    public IReadOnlyList<string> MultiArtist
     {
-        get => GetTagValue(MetaDataType.MultiArtist);
-        set => SetTagValue(MetaDataType.MultiArtist, value);
+        get => GetEncodedEnumTagValue(MetaDataType.MultiArtist);
+        set => SetEncodedEnumTagValue(MetaDataType.MultiArtist, value);
     }
 
     public string PrimaryArtist
@@ -54,10 +54,10 @@ public sealed class MusicFile : IMusicFile
         set => SetTagValue(MetaDataType.PrimaryArtist, value);
     }
 
-    public string Artists
+    public IReadOnlyList<string> Artists
     {
-        get => GetTagValue(MetaDataType.Artists);
-        set => SetTagValue(MetaDataType.Artists, value);
+        get => GetEnumTagValue(MetaDataType.Artists);
+        set => SetEnumTagValue(MetaDataType.Artists, value);
     }
 
     public string ArtistsWithArtistRole
@@ -102,10 +102,10 @@ public sealed class MusicFile : IMusicFile
         set => SetTagValue(MetaDataType.Composer, value);
     }
 
-    public string MultiComposer
+    public IReadOnlyList<string> MultiComposer
     {
-        get => GetTagValue(MetaDataType.MultiComposer);
-        set => SetTagValue(MetaDataType.MultiComposer, value);
+        get => GetEncodedEnumTagValue(MetaDataType.MultiComposer);
+        set => SetEncodedEnumTagValue(MetaDataType.MultiComposer, value);
     }
 
     public string Comment
@@ -170,16 +170,16 @@ public sealed class MusicFile : IMusicFile
         set => SetTagValue(MetaDataType.Encoder, value);
     }
 
-    public string Genre
+    public IReadOnlyList<string> Genre
     {
-        get => GetTagValue(MetaDataType.Genre);
-        set => SetTagValue(MetaDataType.Genre, value);
+        get => GetEnumTagValue(MetaDataType.Genre);
+        set => SetEnumTagValue(MetaDataType.Genre, value);
     }
 
-    public string Genres
+    public IReadOnlyList<string> Genres
     {
-        get => GetTagValue(MetaDataType.Genres);
-        set => SetTagValue(MetaDataType.Genres, value);
+        get => GetEnumTagValue(MetaDataType.Genres);
+        set => SetEnumTagValue(MetaDataType.Genres, value);
     }
 
     public IReadOnlyList<string> GenreCategory
@@ -254,10 +254,10 @@ public sealed class MusicFile : IMusicFile
         set => SetRatingTagValue(MetaDataType.Rating, value);
     }
 
-    public string RatingLove
+    public LoveBanRating RatingLove
     {
-        get => GetTagValue(MetaDataType.RatingLove);
-        set => SetTagValue(MetaDataType.RatingLove, value);
+        get => GetLoveBanRatingTagValue(MetaDataType.RatingLove);
+        set => SetLoveBanRatingTagValue(MetaDataType.RatingLove, value);
     }
 
     public Rating RatingAlbum
@@ -394,10 +394,10 @@ public sealed class MusicFile : IMusicFile
         set => SetNumberTagValue(MetaDataType.MovementCount, value);
     }
 
-    public string ShowMovement
+    public bool ShowMovement
     {
-        get => GetTagValue(MetaDataType.ShowMovement);
-        set => SetTagValue(MetaDataType.ShowMovement, value);
+        get => GetBoolTagValue(MetaDataType.ShowMovement);
+        set => SetBoolTagValue(MetaDataType.ShowMovement, value);
     }
 
     public string Language
@@ -426,7 +426,13 @@ public sealed class MusicFile : IMusicFile
 
     private readonly IMusicBeeApi _musicBeeApi;
     private readonly ReadOnlyMusicFileFactory _readOnlyMusicFileFactory;
-    private readonly IFieldValuesConverter _fieldValuesConverter;
+    private readonly IFieldValueConverter<bool> _boolFieldValueConverter;
+    private readonly IFieldValueConverter<long> _numberFieldValueConverter;
+    private readonly IFieldValueConverter<DateTime> _dateFieldValueConverter;
+    private readonly IFieldValueConverter<IReadOnlyList<string>> _enumFieldValueConverter;
+    private readonly IFieldValueConverter<IReadOnlyList<string>> _encodedEnumFieldValueConverter;
+    private readonly IFieldValueConverter<Rating> _ratingFieldValueConverter;
+    private readonly IFieldValueConverter<LoveBanRating> _loveBanRatingFieldValueConverter;
 
     private readonly IDictionary<MetaDataType, string> _changedTagValues;
     private IReadOnlyMusicFile _musicFileSnapshot;
@@ -435,12 +441,24 @@ public sealed class MusicFile : IMusicFile
         string path,
         IMusicBeeApi musicBeeApi,
         ReadOnlyMusicFileFactory readOnlyMusicFileFactory,
-        IFieldValuesConverter fieldValuesConverter,
+        IFieldValueConverter<bool> boolFieldValueConverter,
+        IFieldValueConverter<long> numberFieldValueConverter,
+        IFieldValueConverter<DateTime> dateFieldValueConverter,
+        IFieldValueConverter<IReadOnlyList<string>> enumFieldValueConverter,
+        IFieldValueConverter<IReadOnlyList<string>> encodedEnumFieldValueConverter,
+        IFieldValueConverter<Rating> ratingFieldValueConverter,
+        IFieldValueConverter<LoveBanRating> loveBanRatingFieldValueConverter,
         VariantFieldFactory variantFieldFactory)
     {
         _musicBeeApi = musicBeeApi;
         _readOnlyMusicFileFactory = readOnlyMusicFileFactory;
-        _fieldValuesConverter = fieldValuesConverter;
+        _boolFieldValueConverter = boolFieldValueConverter;
+        _numberFieldValueConverter = numberFieldValueConverter;
+        _dateFieldValueConverter = dateFieldValueConverter;
+        _enumFieldValueConverter = enumFieldValueConverter;
+        _encodedEnumFieldValueConverter = encodedEnumFieldValueConverter;
+        _ratingFieldValueConverter = ratingFieldValueConverter;
+        _loveBanRatingFieldValueConverter = loveBanRatingFieldValueConverter;
 
         Path = path;
 
@@ -528,51 +546,71 @@ public sealed class MusicFile : IMusicFile
 
     private bool GetBoolTagValue(MetaDataType metaDataType)
     {
-        return _fieldValuesConverter.ConvertStringToBool(GetTagValue(metaDataType));
+        return _boolFieldValueConverter.ConvertFromString(GetTagValue(metaDataType));
     }
 
     private void SetBoolTagValue(MetaDataType metaDataType, bool value)
     {
-        SetTagValue(metaDataType, _fieldValuesConverter.ConvertBoolToString(value));
+        SetTagValue(metaDataType, _boolFieldValueConverter.ConvertToString(value));
     }
 
     private long GetNumberTagValue(MetaDataType metaDataType)
     {
-        return _fieldValuesConverter.ConvertStringToNumber(GetTagValue(metaDataType));
+        return _numberFieldValueConverter.ConvertFromString(GetTagValue(metaDataType));
     }
 
     private void SetNumberTagValue(MetaDataType metaDataType, long value)
     {
-        SetTagValue(metaDataType, _fieldValuesConverter.ConvertNumberToString(value));
+        SetTagValue(metaDataType, _numberFieldValueConverter.ConvertToString(value));
     }
 
     private DateTime GetDateTagValue(MetaDataType metaDataType)
     {
-        return _fieldValuesConverter.ConvertStringToDate(GetTagValue(metaDataType));
+        return _dateFieldValueConverter.ConvertFromString(GetTagValue(metaDataType));
     }
 
     private void SetDateTagValue(MetaDataType metaDataType, DateTime value)
     {
-        SetTagValue(metaDataType, _fieldValuesConverter.ConvertDateToString(value));
+        SetTagValue(metaDataType, _dateFieldValueConverter.ConvertToString(value));
     }
 
     private IReadOnlyList<string> GetEnumTagValue(MetaDataType metaDataType)
     {
-        return _fieldValuesConverter.ConvertStringToEnum(GetTagValue(metaDataType));
+        return _enumFieldValueConverter.ConvertFromString(GetTagValue(metaDataType));
     }
 
     private void SetEnumTagValue(MetaDataType metaDataType, IReadOnlyList<string> value)
     {
-        SetTagValue(metaDataType, _fieldValuesConverter.ConvertEnumToString(value));
+        SetTagValue(metaDataType, _enumFieldValueConverter.ConvertToString(value));
+    }
+
+    private IReadOnlyList<string> GetEncodedEnumTagValue(MetaDataType metaDataType)
+    {
+        return _encodedEnumFieldValueConverter.ConvertFromString(GetTagValue(metaDataType));
+    }
+
+    private void SetEncodedEnumTagValue(MetaDataType metaDataType, IReadOnlyList<string> value)
+    {
+        SetTagValue(metaDataType, _encodedEnumFieldValueConverter.ConvertToString(value));
     }
 
     private Rating GetRatingTagValue(MetaDataType metaDataType)
     {
-        return _fieldValuesConverter.ConvertStringToRating(GetTagValue(metaDataType));
+        return _ratingFieldValueConverter.ConvertFromString(GetTagValue(metaDataType));
     }
 
     private void SetRatingTagValue(MetaDataType metaDataType, Rating value)
     {
-        SetTagValue(metaDataType, _fieldValuesConverter.ConvertRatingToString(value));
+        SetTagValue(metaDataType, _ratingFieldValueConverter.ConvertToString(value));
+    }
+
+    private LoveBanRating GetLoveBanRatingTagValue(MetaDataType metaDataType)
+    {
+        return _loveBanRatingFieldValueConverter.ConvertFromString(GetTagValue(metaDataType));
+    }
+
+    private void SetLoveBanRatingTagValue(MetaDataType metaDataType, LoveBanRating value)
+    {
+        SetTagValue(metaDataType, _loveBanRatingFieldValueConverter.ConvertToString(value));
     }
 }

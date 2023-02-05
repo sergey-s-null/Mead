@@ -11,6 +11,7 @@
 using Mead.MusicBee.Api.Services.Abstract;
 using Mead.MusicBee.Enums;
 using Mead.MusicBee.LibraryApi.Entities.Abstract;
+using Mead.MusicBee.LibraryApi.Enums;
 using Mead.MusicBee.LibraryApi.Factories.Abstract;
 using Mead.MusicBee.LibraryApi.Services.Abstract;
 
@@ -35,18 +36,36 @@ public sealed class CachingReadOnlyMusicFile : IReadOnlyMusicFile
 #>
 
     private readonly IMusicBeeApi _musicBeeApi;
-    private readonly IFieldValuesConverter _fieldValuesConverter;
+    private readonly IFieldValueConverter<bool> _boolFieldValueConverter;
+    private readonly IFieldValueConverter<long> _numberFieldValueConverter;
+    private readonly IFieldValueConverter<DateTime> _dateFieldValueConverter;
+    private readonly IFieldValueConverter<IReadOnlyList<string>> _enumFieldValueConverter;
+    private readonly IFieldValueConverter<IReadOnlyList<string>> _encodedEnumFieldValueConverter;
+    private readonly IFieldValueConverter<Rating> _ratingFieldValueConverter;
+    private readonly IFieldValueConverter<LoveBanRating> _loveBanRatingFieldValueConverter;
 
     private readonly IDictionary<MetaDataType, string> _cachedTagValues;
 
     public CachingReadOnlyMusicFile(
         string path,
         IMusicBeeApi musicBeeApi,
-        IFieldValuesConverter fieldValuesConverter,
+        IFieldValueConverter<bool> boolFieldValueConverter,
+        IFieldValueConverter<long> numberFieldValueConverter,
+        IFieldValueConverter<DateTime> dateFieldValueConverter,
+        IFieldValueConverter<IReadOnlyList<string>> enumFieldValueConverter,
+        IFieldValueConverter<IReadOnlyList<string>> encodedEnumFieldValueConverter,
+        IFieldValueConverter<Rating> ratingFieldValueConverter,
+        IFieldValueConverter<LoveBanRating> loveBanRatingFieldValueConverter,
         ReadOnlyVariantFieldFactory readOnlyVariantFieldFactory)
     {
         _musicBeeApi = musicBeeApi;
-        _fieldValuesConverter = fieldValuesConverter;
+        _boolFieldValueConverter = boolFieldValueConverter;
+        _numberFieldValueConverter = numberFieldValueConverter;
+        _dateFieldValueConverter = dateFieldValueConverter;
+        _enumFieldValueConverter = enumFieldValueConverter;
+        _encodedEnumFieldValueConverter = encodedEnumFieldValueConverter;
+        _ratingFieldValueConverter = ratingFieldValueConverter;
+        _loveBanRatingFieldValueConverter = loveBanRatingFieldValueConverter;
 
 <#
     foreach (var fieldInfo in fieldsInfo.Where(x => x.FieldType == FieldType.Variant))
@@ -77,27 +96,37 @@ public sealed class CachingReadOnlyMusicFile : IReadOnlyMusicFile
 
     private bool GetBoolTagValue(MetaDataType metaDataType)
     {
-        return _fieldValuesConverter.ConvertStringToBool(GetTagValue(metaDataType));
+        return _boolFieldValueConverter.ConvertFromString(GetTagValue(metaDataType));
     }
 
     private long GetNumberTagValue(MetaDataType metaDataType)
     {
-        return _fieldValuesConverter.ConvertStringToNumber(GetTagValue(metaDataType));
+        return _numberFieldValueConverter.ConvertFromString(GetTagValue(metaDataType));
     }
 
     private DateTime GetDateTagValue(MetaDataType metaDataType)
     {
-        return _fieldValuesConverter.ConvertStringToDate(GetTagValue(metaDataType));
+        return _dateFieldValueConverter.ConvertFromString(GetTagValue(metaDataType));
     }
 
     private IReadOnlyList<string> GetEnumTagValue(MetaDataType metaDataType)
     {
-        return _fieldValuesConverter.ConvertStringToEnum(GetTagValue(metaDataType));
+        return _enumFieldValueConverter.ConvertFromString(GetTagValue(metaDataType));
+    }
+
+    private IReadOnlyList<string> GetEncodedEnumTagValue(MetaDataType metaDataType)
+    {
+        return _encodedEnumFieldValueConverter.ConvertFromString(GetTagValue(metaDataType));
     }
 
     private Rating GetRatingTagValue(MetaDataType metaDataType)
     {
-        return _fieldValuesConverter.ConvertStringToRating(GetTagValue(metaDataType));
+        return _ratingFieldValueConverter.ConvertFromString(GetTagValue(metaDataType));
+    }
+
+    private LoveBanRating GetLoveBanRatingTagValue(MetaDataType metaDataType)
+    {
+        return _loveBanRatingFieldValueConverter.ConvertFromString(GetTagValue(metaDataType));
     }
 }
 <#+
@@ -109,7 +138,9 @@ public sealed class CachingReadOnlyMusicFile : IReadOnlyMusicFile
             FieldType.Number => "GetNumberTagValue",
             FieldType.Date => "GetDateTagValue",
             FieldType.Enum => "GetEnumTagValue",
+            FieldType.EncodedEnum => "GetEncodedEnumTagValue",
             FieldType.Rating => "GetRatingTagValue",
+            FieldType.LoveBanRating => "GetLoveBanRatingTagValue",
             FieldType.Variant => throw new NotSupportedException(),
             _ => throw new ArgumentOutOfRangeException(nameof(fieldType), fieldType, null)
             };

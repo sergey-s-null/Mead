@@ -9,29 +9,41 @@ public sealed class ReadOnlyVariantField : IReadOnlyVariantField
     public string StringValue => _getTagValue();
 
     public bool BoolValue =>
-        _fieldValuesConverter.ConvertStringToBool(_getTagValue());
+        _boolFieldValueConverter.ConvertFromString(_getTagValue());
 
     public long NumberValue =>
-        _fieldValuesConverter.ConvertStringToNumber(_getTagValue());
+        _numberFieldValueConverter.ConvertFromString(_getTagValue());
 
     public DateTime DateValue =>
-        _fieldValuesConverter.ConvertStringToDate(_getTagValue());
+        _dateFieldValueConverter.ConvertFromString(_getTagValue());
 
     public IReadOnlyList<string> EnumValue =>
-        _fieldValuesConverter.ConvertStringToEnum(_getTagValue());
+        _enumFieldValueConverter.ConvertFromString(_getTagValue());
 
     public Rating RatingValue =>
-        _fieldValuesConverter.ConvertStringToRating(_getTagValue());
+        _ratingFieldValueConverter.ConvertFromString(_getTagValue());
 
     private readonly Func<string> _getTagValue;
 
-    private readonly IFieldValuesConverter _fieldValuesConverter;
+    private readonly IFieldValueConverter<bool> _boolFieldValueConverter;
+    private readonly IFieldValueConverter<long> _numberFieldValueConverter;
+    private readonly IFieldValueConverter<DateTime> _dateFieldValueConverter;
+    private readonly IFieldValueConverter<IReadOnlyList<string>> _enumFieldValueConverter;
+    private readonly IFieldValueConverter<Rating> _ratingFieldValueConverter;
 
     public ReadOnlyVariantField(
         Func<string> getTagValue,
-        IFieldValuesConverter fieldValuesConverter)
+        IFieldValueConverter<bool> boolFieldValueConverter,
+        IFieldValueConverter<long> numberFieldValueConverter,
+        IFieldValueConverter<DateTime> dateFieldValueConverter,
+        IFieldValueConverter<IReadOnlyList<string>> enumFieldValueConverter,
+        IFieldValueConverter<Rating> ratingFieldValueConverter)
     {
         _getTagValue = getTagValue;
-        _fieldValuesConverter = fieldValuesConverter;
+        _boolFieldValueConverter = boolFieldValueConverter;
+        _numberFieldValueConverter = numberFieldValueConverter;
+        _dateFieldValueConverter = dateFieldValueConverter;
+        _enumFieldValueConverter = enumFieldValueConverter;
+        _ratingFieldValueConverter = ratingFieldValueConverter;
     }
 }

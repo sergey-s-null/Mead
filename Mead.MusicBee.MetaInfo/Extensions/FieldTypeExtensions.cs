@@ -13,7 +13,9 @@ public static class FieldTypeExtensions
             FieldType.Number => "long",
             FieldType.Date => "DateTime",
             FieldType.Enum => "IReadOnlyList<string>",
+            FieldType.EncodedEnum => "IReadOnlyList<string>",
             FieldType.Rating => "Rating",
+            FieldType.LoveBanRating => "LoveBanRating",
             FieldType.Variant => isReadOnly
                 ? "IReadOnlyVariantField"
                 : "IVariantField",
