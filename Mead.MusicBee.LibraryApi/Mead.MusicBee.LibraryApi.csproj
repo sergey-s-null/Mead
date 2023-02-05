@@ -59,4 +59,8 @@
 	  <ProjectReference Include="..\Mead.MusicBee\Mead.MusicBee.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <PackageReference Include="Mead.MusicBee" Version="1.1.1" />
+	</ItemGroup>
+
 </Project>
