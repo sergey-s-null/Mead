@@ -7,7 +7,9 @@ public enum FieldType
     Number,
     Date,
     Enum,
+    EncodedEnum,
     Rating,
+    RatingLoveBan,
 
     Variant
 }

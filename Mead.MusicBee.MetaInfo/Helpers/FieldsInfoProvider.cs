@@ -11,19 +11,19 @@ public static class FieldsInfoProvider
         new MusicFileFieldInfo(MetaDataType.TrackTitle, FieldType.String),
         new MusicFileFieldInfo(MetaDataType.Album, FieldType.String),
         new MusicFileFieldInfo(MetaDataType.AlbumArtist, FieldType.String),
-        new MusicFileFieldInfo(MetaDataType.AlbumArtistRaw, FieldType.String), // todo check field type
+        new MusicFileFieldInfo(MetaDataType.AlbumArtistRaw, FieldType.String),
         new MusicFileFieldInfo(MetaDataType.Artist, FieldType.String),
-        new MusicFileFieldInfo(MetaDataType.MultiArtist, FieldType.String), // todo check field type
-        new MusicFileFieldInfo(MetaDataType.PrimaryArtist, FieldType.String), // todo check field type
-        new MusicFileFieldInfo(MetaDataType.Artists, FieldType.String), // todo check field type
+        new MusicFileFieldInfo(MetaDataType.MultiArtist, FieldType.EncodedEnum),
+        new MusicFileFieldInfo(MetaDataType.PrimaryArtist, FieldType.String),
+        new MusicFileFieldInfo(MetaDataType.Artists, FieldType.Enum),
         new MusicFileFieldInfo(MetaDataType.ArtistsWithArtistRole, FieldType.String),
         new MusicFileFieldInfo(MetaDataType.ArtistsWithPerformerRole, FieldType.String),
         new MusicFileFieldInfo(MetaDataType.ArtistsWithGuestRole, FieldType.String),
         new MusicFileFieldInfo(MetaDataType.ArtistsWithRemixerRole, FieldType.String),
-        new MusicFileFieldInfo(MetaDataType.Artwork, FieldType.String), // todo check field type
+        new MusicFileFieldInfo(MetaDataType.Artwork, FieldType.String),
         new MusicFileFieldInfo(MetaDataType.BeatsPerMin, FieldType.Number),
         new MusicFileFieldInfo(MetaDataType.Composer, FieldType.String),
-        new MusicFileFieldInfo(MetaDataType.MultiComposer, FieldType.String), // todo check field type
+        new MusicFileFieldInfo(MetaDataType.MultiComposer, FieldType.EncodedEnum),
         new MusicFileFieldInfo(MetaDataType.Comment, FieldType.String),
         new MusicFileFieldInfo(MetaDataType.Conductor, FieldType.String),
         new MusicFileFieldInfo(MetaDataType.Custom1, FieldType.Variant),
@@ -45,8 +45,8 @@ public static class FieldsInfoProvider
         new MusicFileFieldInfo(MetaDataType.DiscNo, FieldType.Number),
         new MusicFileFieldInfo(MetaDataType.DiscCount, FieldType.Number),
         new MusicFileFieldInfo(MetaDataType.Encoder, FieldType.String),
-        new MusicFileFieldInfo(MetaDataType.Genre, FieldType.String), // todo check field type
-        new MusicFileFieldInfo(MetaDataType.Genres, FieldType.String), // todo check field type
+        new MusicFileFieldInfo(MetaDataType.Genre, FieldType.Enum),
+        new MusicFileFieldInfo(MetaDataType.Genres, FieldType.Enum),
         new MusicFileFieldInfo(MetaDataType.GenreCategory, FieldType.Enum),
         new MusicFileFieldInfo(MetaDataType.Grouping, FieldType.Enum),
         new MusicFileFieldInfo(MetaDataType.Keywords, FieldType.Enum),
@@ -55,11 +55,11 @@ public static class FieldsInfoProvider
         new MusicFileFieldInfo(MetaDataType.Lyrics, FieldType.String),
         new MusicFileFieldInfo(MetaDataType.Mood, FieldType.Enum),
         new MusicFileFieldInfo(MetaDataType.Occasion, FieldType.Enum),
-        new MusicFileFieldInfo(MetaDataType.Origin, FieldType.String), // todo check field type
+        new MusicFileFieldInfo(MetaDataType.Origin, FieldType.String),
         new MusicFileFieldInfo(MetaDataType.Publisher, FieldType.String),
         new MusicFileFieldInfo(MetaDataType.Quality, FieldType.Enum),
         new MusicFileFieldInfo(MetaDataType.Rating, FieldType.Rating),
-        new MusicFileFieldInfo(MetaDataType.RatingLove, FieldType.String), // todo check field type
+        new MusicFileFieldInfo(MetaDataType.RatingLove, FieldType.RatingLoveBan),
         new MusicFileFieldInfo(MetaDataType.RatingAlbum, FieldType.Rating),
         new MusicFileFieldInfo(MetaDataType.Tempo, FieldType.Enum),
         new MusicFileFieldInfo(MetaDataType.TrackNo, FieldType.Number),
@@ -99,11 +99,11 @@ public static class FieldsInfoProvider
         new MusicFileFieldInfo(MetaDataType.MovementName, FieldType.String),
         new MusicFileFieldInfo(MetaDataType.MovementNo, FieldType.Number),
         new MusicFileFieldInfo(MetaDataType.MovementCount, FieldType.Number),
-        new MusicFileFieldInfo(MetaDataType.ShowMovement, FieldType.String), // todo check field type
+        new MusicFileFieldInfo(MetaDataType.ShowMovement, FieldType.Bool),
         new MusicFileFieldInfo(MetaDataType.Language, FieldType.String),
         new MusicFileFieldInfo(MetaDataType.OriginalArtist, FieldType.String),
         new MusicFileFieldInfo(MetaDataType.OriginalYear, FieldType.Date),
-        new MusicFileFieldInfo(MetaDataType.OriginalTitle, FieldType.String), // todo check field type
+        new MusicFileFieldInfo(MetaDataType.OriginalTitle, FieldType.String),
     };
 
     public static IReadOnlyList<MusicFileFieldInfo> GetFieldsInfo()
