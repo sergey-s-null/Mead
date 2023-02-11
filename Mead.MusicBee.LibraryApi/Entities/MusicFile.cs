@@ -46,8 +46,8 @@ public sealed class MusicFile : IMusicFile
 
     public IReadOnlyList<string> MultiArtist
     {
-        get => _musicFileTypedTagsManager.GetEncodedEnum(MetaDataType.MultiArtist);
-        set => _musicFileTypedTagsManager.SetEncodedEnum(MetaDataType.MultiArtist, value);
+        get => _musicFileTypedTagsGetter.GetEncodedEnum(MetaDataType.MultiArtist);
+        set => _musicFileTypedTagsSetter.SetEncodedEnum(MetaDataType.MultiArtist, value);
     }
 
     public string PrimaryArtist
@@ -58,8 +58,8 @@ public sealed class MusicFile : IMusicFile
 
     public IReadOnlyList<string> Artists
     {
-        get => _musicFileTypedTagsManager.GetEnum(MetaDataType.Artists);
-        set => _musicFileTypedTagsManager.SetEnum(MetaDataType.Artists, value);
+        get => _musicFileTypedTagsGetter.GetEnum(MetaDataType.Artists);
+        set => _musicFileTypedTagsSetter.SetEnum(MetaDataType.Artists, value);
     }
 
     public string ArtistsWithArtistRole
@@ -94,8 +94,8 @@ public sealed class MusicFile : IMusicFile
 
     public long BeatsPerMin
     {
-        get => _musicFileTypedTagsManager.GetNumber(MetaDataType.BeatsPerMin);
-        set => _musicFileTypedTagsManager.SetNumber(MetaDataType.BeatsPerMin, value);
+        get => _musicFileTypedTagsGetter.GetNumber(MetaDataType.BeatsPerMin);
+        set => _musicFileTypedTagsSetter.SetNumber(MetaDataType.BeatsPerMin, value);
     }
 
     public string Composer
@@ -106,8 +106,8 @@ public sealed class MusicFile : IMusicFile
 
     public IReadOnlyList<string> MultiComposer
     {
-        get => _musicFileTypedTagsManager.GetEncodedEnum(MetaDataType.MultiComposer);
-        set => _musicFileTypedTagsManager.SetEncodedEnum(MetaDataType.MultiComposer, value);
+        get => _musicFileTypedTagsGetter.GetEncodedEnum(MetaDataType.MultiComposer);
+        set => _musicFileTypedTagsSetter.SetEncodedEnum(MetaDataType.MultiComposer, value);
     }
 
     public string Comment
@@ -156,14 +156,14 @@ public sealed class MusicFile : IMusicFile
 
     public long DiscNo
     {
-        get => _musicFileTypedTagsManager.GetNumber(MetaDataType.DiscNo);
-        set => _musicFileTypedTagsManager.SetNumber(MetaDataType.DiscNo, value);
+        get => _musicFileTypedTagsGetter.GetNumber(MetaDataType.DiscNo);
+        set => _musicFileTypedTagsSetter.SetNumber(MetaDataType.DiscNo, value);
     }
 
     public long DiscCount
     {
-        get => _musicFileTypedTagsManager.GetNumber(MetaDataType.DiscCount);
-        set => _musicFileTypedTagsManager.SetNumber(MetaDataType.DiscCount, value);
+        get => _musicFileTypedTagsGetter.GetNumber(MetaDataType.DiscCount);
+        set => _musicFileTypedTagsSetter.SetNumber(MetaDataType.DiscCount, value);
     }
 
     public string Encoder
@@ -174,38 +174,38 @@ public sealed class MusicFile : IMusicFile
 
     public IReadOnlyList<string> Genre
     {
-        get => _musicFileTypedTagsManager.GetEnum(MetaDataType.Genre);
-        set => _musicFileTypedTagsManager.SetEnum(MetaDataType.Genre, value);
+        get => _musicFileTypedTagsGetter.GetEnum(MetaDataType.Genre);
+        set => _musicFileTypedTagsSetter.SetEnum(MetaDataType.Genre, value);
     }
 
     public IReadOnlyList<string> Genres
     {
-        get => _musicFileTypedTagsManager.GetEnum(MetaDataType.Genres);
-        set => _musicFileTypedTagsManager.SetEnum(MetaDataType.Genres, value);
+        get => _musicFileTypedTagsGetter.GetEnum(MetaDataType.Genres);
+        set => _musicFileTypedTagsSetter.SetEnum(MetaDataType.Genres, value);
     }
 
     public IReadOnlyList<string> GenreCategory
     {
-        get => _musicFileTypedTagsManager.GetEnum(MetaDataType.GenreCategory);
-        set => _musicFileTypedTagsManager.SetEnum(MetaDataType.GenreCategory, value);
+        get => _musicFileTypedTagsGetter.GetEnum(MetaDataType.GenreCategory);
+        set => _musicFileTypedTagsSetter.SetEnum(MetaDataType.GenreCategory, value);
     }
 
     public IReadOnlyList<string> Grouping
     {
-        get => _musicFileTypedTagsManager.GetEnum(MetaDataType.Grouping);
-        set => _musicFileTypedTagsManager.SetEnum(MetaDataType.Grouping, value);
+        get => _musicFileTypedTagsGetter.GetEnum(MetaDataType.Grouping);
+        set => _musicFileTypedTagsSetter.SetEnum(MetaDataType.Grouping, value);
     }
 
     public IReadOnlyList<string> Keywords
     {
-        get => _musicFileTypedTagsManager.GetEnum(MetaDataType.Keywords);
-        set => _musicFileTypedTagsManager.SetEnum(MetaDataType.Keywords, value);
+        get => _musicFileTypedTagsGetter.GetEnum(MetaDataType.Keywords);
+        set => _musicFileTypedTagsSetter.SetEnum(MetaDataType.Keywords, value);
     }
 
     public bool HasLyrics
     {
-        get => _musicFileTypedTagsManager.GetBool(MetaDataType.HasLyrics);
-        set => _musicFileTypedTagsManager.SetBool(MetaDataType.HasLyrics, value);
+        get => _musicFileTypedTagsGetter.GetBool(MetaDataType.HasLyrics);
+        set => _musicFileTypedTagsSetter.SetBool(MetaDataType.HasLyrics, value);
     }
 
     public string Lyricist
@@ -222,14 +222,14 @@ public sealed class MusicFile : IMusicFile
 
     public IReadOnlyList<string> Mood
     {
-        get => _musicFileTypedTagsManager.GetEnum(MetaDataType.Mood);
-        set => _musicFileTypedTagsManager.SetEnum(MetaDataType.Mood, value);
+        get => _musicFileTypedTagsGetter.GetEnum(MetaDataType.Mood);
+        set => _musicFileTypedTagsSetter.SetEnum(MetaDataType.Mood, value);
     }
 
     public IReadOnlyList<string> Occasion
     {
-        get => _musicFileTypedTagsManager.GetEnum(MetaDataType.Occasion);
-        set => _musicFileTypedTagsManager.SetEnum(MetaDataType.Occasion, value);
+        get => _musicFileTypedTagsGetter.GetEnum(MetaDataType.Occasion);
+        set => _musicFileTypedTagsSetter.SetEnum(MetaDataType.Occasion, value);
     }
 
     public string Origin
@@ -246,44 +246,44 @@ public sealed class MusicFile : IMusicFile
 
     public IReadOnlyList<string> Quality
     {
-        get => _musicFileTypedTagsManager.GetEnum(MetaDataType.Quality);
-        set => _musicFileTypedTagsManager.SetEnum(MetaDataType.Quality, value);
+        get => _musicFileTypedTagsGetter.GetEnum(MetaDataType.Quality);
+        set => _musicFileTypedTagsSetter.SetEnum(MetaDataType.Quality, value);
     }
 
     public Rating Rating
     {
-        get => _musicFileTypedTagsManager.GetRating(MetaDataType.Rating);
-        set => _musicFileTypedTagsManager.SetRating(MetaDataType.Rating, value);
+        get => _musicFileTypedTagsGetter.GetRating(MetaDataType.Rating);
+        set => _musicFileTypedTagsSetter.SetRating(MetaDataType.Rating, value);
     }
 
     public LoveBanRating RatingLove
     {
-        get => _musicFileTypedTagsManager.GetLoveBanRating(MetaDataType.RatingLove);
-        set => _musicFileTypedTagsManager.SetLoveBanRating(MetaDataType.RatingLove, value);
+        get => _musicFileTypedTagsGetter.GetLoveBanRating(MetaDataType.RatingLove);
+        set => _musicFileTypedTagsSetter.SetLoveBanRating(MetaDataType.RatingLove, value);
     }
 
     public Rating RatingAlbum
     {
-        get => _musicFileTypedTagsManager.GetRating(MetaDataType.RatingAlbum);
-        set => _musicFileTypedTagsManager.SetRating(MetaDataType.RatingAlbum, value);
+        get => _musicFileTypedTagsGetter.GetRating(MetaDataType.RatingAlbum);
+        set => _musicFileTypedTagsSetter.SetRating(MetaDataType.RatingAlbum, value);
     }
 
     public IReadOnlyList<string> Tempo
     {
-        get => _musicFileTypedTagsManager.GetEnum(MetaDataType.Tempo);
-        set => _musicFileTypedTagsManager.SetEnum(MetaDataType.Tempo, value);
+        get => _musicFileTypedTagsGetter.GetEnum(MetaDataType.Tempo);
+        set => _musicFileTypedTagsSetter.SetEnum(MetaDataType.Tempo, value);
     }
 
     public long TrackNo
     {
-        get => _musicFileTypedTagsManager.GetNumber(MetaDataType.TrackNo);
-        set => _musicFileTypedTagsManager.SetNumber(MetaDataType.TrackNo, value);
+        get => _musicFileTypedTagsGetter.GetNumber(MetaDataType.TrackNo);
+        set => _musicFileTypedTagsSetter.SetNumber(MetaDataType.TrackNo, value);
     }
 
     public long TrackCount
     {
-        get => _musicFileTypedTagsManager.GetNumber(MetaDataType.TrackCount);
-        set => _musicFileTypedTagsManager.SetNumber(MetaDataType.TrackCount, value);
+        get => _musicFileTypedTagsGetter.GetNumber(MetaDataType.TrackCount);
+        set => _musicFileTypedTagsSetter.SetNumber(MetaDataType.TrackCount, value);
     }
 
     public IVariantField Virtual1 { get; }
@@ -338,8 +338,8 @@ public sealed class MusicFile : IMusicFile
 
     public long Year
     {
-        get => _musicFileTypedTagsManager.GetNumber(MetaDataType.Year);
-        set => _musicFileTypedTagsManager.SetNumber(MetaDataType.Year, value);
+        get => _musicFileTypedTagsGetter.GetNumber(MetaDataType.Year);
+        set => _musicFileTypedTagsSetter.SetNumber(MetaDataType.Year, value);
     }
 
     public string SortTitle
@@ -386,20 +386,20 @@ public sealed class MusicFile : IMusicFile
 
     public long MovementNo
     {
-        get => _musicFileTypedTagsManager.GetNumber(MetaDataType.MovementNo);
-        set => _musicFileTypedTagsManager.SetNumber(MetaDataType.MovementNo, value);
+        get => _musicFileTypedTagsGetter.GetNumber(MetaDataType.MovementNo);
+        set => _musicFileTypedTagsSetter.SetNumber(MetaDataType.MovementNo, value);
     }
 
     public long MovementCount
     {
-        get => _musicFileTypedTagsManager.GetNumber(MetaDataType.MovementCount);
-        set => _musicFileTypedTagsManager.SetNumber(MetaDataType.MovementCount, value);
+        get => _musicFileTypedTagsGetter.GetNumber(MetaDataType.MovementCount);
+        set => _musicFileTypedTagsSetter.SetNumber(MetaDataType.MovementCount, value);
     }
 
     public bool ShowMovement
     {
-        get => _musicFileTypedTagsManager.GetBool(MetaDataType.ShowMovement);
-        set => _musicFileTypedTagsManager.SetBool(MetaDataType.ShowMovement, value);
+        get => _musicFileTypedTagsGetter.GetBool(MetaDataType.ShowMovement);
+        set => _musicFileTypedTagsSetter.SetBool(MetaDataType.ShowMovement, value);
     }
 
     public string Language
@@ -416,8 +416,8 @@ public sealed class MusicFile : IMusicFile
 
     public DateTime OriginalYear
     {
-        get => _musicFileTypedTagsManager.GetDate(MetaDataType.OriginalYear);
-        set => _musicFileTypedTagsManager.SetDate(MetaDataType.OriginalYear, value);
+        get => _musicFileTypedTagsGetter.GetDate(MetaDataType.OriginalYear);
+        set => _musicFileTypedTagsSetter.SetDate(MetaDataType.OriginalYear, value);
     }
 
     public string OriginalTitle
@@ -430,7 +430,8 @@ public sealed class MusicFile : IMusicFile
 
     private readonly IMusicBeeApi _musicBeeApi;
     private readonly ReadOnlyMusicFileFactory _readOnlyMusicFileFactory;
-    private readonly IMusicFileTypedTagsManager _musicFileTypedTagsManager;
+    private readonly IMusicFileTypedTagsGetter _musicFileTypedTagsGetter;
+    private readonly IMusicFileTypedTagsSetter _musicFileTypedTagsSetter;
 
     private readonly IDictionary<MetaDataType, string> _changedTagValues;
     private IReadOnlyMusicFile _musicFileSnapshot;
@@ -439,12 +440,14 @@ public sealed class MusicFile : IMusicFile
         string path,
         IMusicBeeApi musicBeeApi,
         ReadOnlyMusicFileFactory readOnlyMusicFileFactory,
-        MusicFileTypedTagsManagerFactory musicFileTypedTagsManagerFactory,
+        MusicFileTypedTagsGetterFactory musicFileTypedTagsGetterFactory,
+        MusicFileTypedTagsSetterFactory musicFileTypedTagsSetterFactory,
         VariantFieldFactory variantFieldFactory)
     {
         _musicBeeApi = musicBeeApi;
         _readOnlyMusicFileFactory = readOnlyMusicFileFactory;
-        _musicFileTypedTagsManager = musicFileTypedTagsManagerFactory(GetTagValue, SetTagValue);
+        _musicFileTypedTagsGetter = musicFileTypedTagsGetterFactory(GetTagValue);
+        _musicFileTypedTagsSetter = musicFileTypedTagsSetterFactory(SetTagValue);
 
         Path = path;
 

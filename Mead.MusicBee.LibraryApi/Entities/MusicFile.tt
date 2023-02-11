@@ -30,17 +30,14 @@ public sealed class MusicFile : IMusicFile
         var metaDataType = fieldInfo.MetaDataType.ToString();
         if (fieldInfo.FieldType != FieldType.Variant)
         {
-            var methodPrefix = fieldInfo.FieldType != FieldType.String
-                ? "_musicFileTypedTagsManager."
-                : string.Empty;
             var getterMethodName = GetGetterMethodName(fieldInfo.FieldType);
             var setterMethodName = GetSetterMethodName(fieldInfo.FieldType);
 #>
 
     public <#= propertyType #> <#= metaDataType #>
     {
-        get => <#= methodPrefix #><#= getterMethodName #>(MetaDataType.<#= metaDataType #>);
-        set => <#= methodPrefix #><#= setterMethodName #>(MetaDataType.<#= metaDataType #>, value);
+        get => <#= getterMethodName #>(MetaDataType.<#= metaDataType #>);
+        set => <#= setterMethodName #>(MetaDataType.<#= metaDataType #>, value);
     }
 <#
         }
@@ -58,7 +55,8 @@ public sealed class MusicFile : IMusicFile
 
     private readonly IMusicBeeApi _musicBeeApi;
     private readonly ReadOnlyMusicFileFactory _readOnlyMusicFileFactory;
-    private readonly IMusicFileTypedTagsManager _musicFileTypedTagsManager;
+    private readonly IMusicFileTypedTagsGetter _musicFileTypedTagsGetter;
+    private readonly IMusicFileTypedTagsSetter _musicFileTypedTagsSetter;
 
     private readonly IDictionary<MetaDataType, string> _changedTagValues;
     private IReadOnlyMusicFile _musicFileSnapshot;
@@ -67,12 +65,14 @@ public sealed class MusicFile : IMusicFile
         string path,
         IMusicBeeApi musicBeeApi,
         ReadOnlyMusicFileFactory readOnlyMusicFileFactory,
-        MusicFileTypedTagsManagerFactory musicFileTypedTagsManagerFactory,
+        MusicFileTypedTagsGetterFactory musicFileTypedTagsGetterFactory,
+        MusicFileTypedTagsSetterFactory musicFileTypedTagsSetterFactory,
         VariantFieldFactory variantFieldFactory)
     {
         _musicBeeApi = musicBeeApi;
         _readOnlyMusicFileFactory = readOnlyMusicFileFactory;
-        _musicFileTypedTagsManager = musicFileTypedTagsManagerFactory(GetTagValue, SetTagValue);
+        _musicFileTypedTagsGetter = musicFileTypedTagsGetterFactory(GetTagValue);
+        _musicFileTypedTagsSetter = musicFileTypedTagsSetterFactory(SetTagValue);
 
         Path = path;
 
@@ -136,7 +136,11 @@ public sealed class MusicFile : IMusicFile
 <#+
     private static string GetGetterMethodName(FieldType fieldType)
     {
-        return fieldType switch {
+        var classField = fieldType != FieldType.String
+            ? "_musicFileTypedTagsGetter."
+            : string.Empty;
+
+        var method = fieldType switch {
             FieldType.String => "GetTagValue",
             FieldType.Bool => "GetBool",
             FieldType.Number => "GetNumber",
@@ -148,11 +152,17 @@ public sealed class MusicFile : IMusicFile
             FieldType.Variant => throw new NotSupportedException(),
             _ => throw new ArgumentOutOfRangeException(nameof(fieldType), fieldType, null)
             };
+
+        return $"{classField}{method}";
     }
 
     private static string GetSetterMethodName(FieldType fieldType)
     {
-        return fieldType switch {
+        var classField = fieldType != FieldType.String
+            ? "_musicFileTypedTagsSetter."
+            : string.Empty;
+
+        var method = fieldType switch {
             FieldType.String => "SetTagValue",
             FieldType.Bool => "SetBool",
             FieldType.Number => "SetNumber",
@@ -164,5 +174,7 @@ public sealed class MusicFile : IMusicFile
             FieldType.Variant => throw new NotSupportedException(),
             _ => throw new ArgumentOutOfRangeException(nameof(fieldType), fieldType, null)
             };
+
+        return $"{classField}{method}";
     }
 #>

@@ -3,7 +3,6 @@ using Mead.MusicBee.LibraryApi.Services.Abstract;
 
 namespace Mead.MusicBee.LibraryApi.Factories.Abstract;
 
-public delegate IMusicFileTypedTagsManager MusicFileTypedTagsManagerFactory(
-    Func<MetaDataType, string> getTagValue,
+public delegate IMusicFileTypedTagsSetter MusicFileTypedTagsSetterFactory(
     Action<MetaDataType, string> setTagValue
 );
