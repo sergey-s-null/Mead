@@ -1,4 +1,5 @@
-﻿using Mead.MusicBee.LibraryApi.Services.Abstract;
+﻿using Mead.MusicBee.LibraryApi.Exceptions;
+using Mead.MusicBee.LibraryApi.Services.Abstract;
 
 namespace Mead.MusicBee.LibraryApi.Services;
 
@@ -6,11 +7,16 @@ public sealed class NumberFieldValueConverter : IFieldValueConverter<long>
 {
     public string ConvertToString(long value)
     {
-        throw new NotImplementedException();
+        return value.ToString();
     }
 
     public long ConvertFromString(string value)
     {
-        throw new NotImplementedException();
+        if (!long.TryParse(value, out var longValue))
+        {
+            throw new FieldConversionException($"Could not convert value \"{value}\" to long.");
+        }
+
+        return longValue;
     }
 }
