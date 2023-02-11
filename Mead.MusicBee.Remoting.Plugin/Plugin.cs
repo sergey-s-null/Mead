@@ -21,7 +21,7 @@ public sealed class Plugin : PluginBase
 
     protected override void OnMusicBeeApiProvided(MusicBeeApiMemoryContainer musicBeeApi)
     {
-        var container = PluginContainer.Create();
+        var container = PluginContainer.Create(musicBeeApi);
 
         _pluginConfiguration = container.Resolve<IPluginConfiguration>();
         _musicBeeApiServiceFactory = container.Resolve<Func<MusicBeeApiServiceImpl>>();

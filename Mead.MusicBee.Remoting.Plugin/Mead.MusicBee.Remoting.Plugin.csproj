@@ -30,6 +30,7 @@
 	  </PackageReference>
 	  <PackageReference Include="Mead.MusicBee" Version="1.1.1" />
 	  <PackageReference Include="Mead.MusicBee.Api" Version="1.0.0" />
+	  <PackageReference Include="Mead.MusicBee.Api.Autofac.DependencyInjection" Version="1.0.1" />
 	</ItemGroup>
 
 	<ItemGroup>
