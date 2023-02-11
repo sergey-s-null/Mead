@@ -12,4 +12,14 @@
 	  <Reference Include="System.Net.Http" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Update="Protos\MusicBeeApiService.tt">
+	    <Generator>TextTemplatingFileGenerator</Generator>
+	    <LastGenOutput>MusicBeeApiService.proto</LastGenOutput>
+	  </None>
+	  <None Update="Protos\MusicBeeApiService.proto">
+	    <DependentUpon>MusicBeeApiService.tt</DependentUpon>
+	  </None>
+	</ItemGroup>
+
 </Project>
