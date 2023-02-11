@@ -18,17 +18,17 @@ public sealed class CachingReadOnlyMusicFile : IReadOnlyMusicFile
     public string AlbumArtist => GetTagValue(MetaDataType.AlbumArtist);
     public string AlbumArtistRaw => GetTagValue(MetaDataType.AlbumArtistRaw);
     public string Artist => GetTagValue(MetaDataType.Artist);
-    public IReadOnlyList<string> MultiArtist => GetEncodedEnumTagValue(MetaDataType.MultiArtist);
+    public IReadOnlyList<string> MultiArtist => _musicFileTypedTagsGetter.GetEncodedEnum(MetaDataType.MultiArtist);
     public string PrimaryArtist => GetTagValue(MetaDataType.PrimaryArtist);
-    public IReadOnlyList<string> Artists => GetEnumTagValue(MetaDataType.Artists);
+    public IReadOnlyList<string> Artists => _musicFileTypedTagsGetter.GetEnum(MetaDataType.Artists);
     public string ArtistsWithArtistRole => GetTagValue(MetaDataType.ArtistsWithArtistRole);
     public string ArtistsWithPerformerRole => GetTagValue(MetaDataType.ArtistsWithPerformerRole);
     public string ArtistsWithGuestRole => GetTagValue(MetaDataType.ArtistsWithGuestRole);
     public string ArtistsWithRemixerRole => GetTagValue(MetaDataType.ArtistsWithRemixerRole);
     public string Artwork => GetTagValue(MetaDataType.Artwork);
-    public long BeatsPerMin => GetNumberTagValue(MetaDataType.BeatsPerMin);
+    public long BeatsPerMin => _musicFileTypedTagsGetter.GetNumber(MetaDataType.BeatsPerMin);
     public string Composer => GetTagValue(MetaDataType.Composer);
-    public IReadOnlyList<string> MultiComposer => GetEncodedEnumTagValue(MetaDataType.MultiComposer);
+    public IReadOnlyList<string> MultiComposer => _musicFileTypedTagsGetter.GetEncodedEnum(MetaDataType.MultiComposer);
     public string Comment => GetTagValue(MetaDataType.Comment);
     public string Conductor => GetTagValue(MetaDataType.Conductor);
     public IReadOnlyVariantField Custom1 { get; }
@@ -47,28 +47,28 @@ public sealed class CachingReadOnlyMusicFile : IReadOnlyMusicFile
     public IReadOnlyVariantField Custom14 { get; }
     public IReadOnlyVariantField Custom15 { get; }
     public IReadOnlyVariantField Custom16 { get; }
-    public long DiscNo => GetNumberTagValue(MetaDataType.DiscNo);
-    public long DiscCount => GetNumberTagValue(MetaDataType.DiscCount);
+    public long DiscNo => _musicFileTypedTagsGetter.GetNumber(MetaDataType.DiscNo);
+    public long DiscCount => _musicFileTypedTagsGetter.GetNumber(MetaDataType.DiscCount);
     public string Encoder => GetTagValue(MetaDataType.Encoder);
-    public IReadOnlyList<string> Genre => GetEnumTagValue(MetaDataType.Genre);
-    public IReadOnlyList<string> Genres => GetEnumTagValue(MetaDataType.Genres);
-    public IReadOnlyList<string> GenreCategory => GetEnumTagValue(MetaDataType.GenreCategory);
-    public IReadOnlyList<string> Grouping => GetEnumTagValue(MetaDataType.Grouping);
-    public IReadOnlyList<string> Keywords => GetEnumTagValue(MetaDataType.Keywords);
-    public bool HasLyrics => GetBoolTagValue(MetaDataType.HasLyrics);
+    public IReadOnlyList<string> Genre => _musicFileTypedTagsGetter.GetEnum(MetaDataType.Genre);
+    public IReadOnlyList<string> Genres => _musicFileTypedTagsGetter.GetEnum(MetaDataType.Genres);
+    public IReadOnlyList<string> GenreCategory => _musicFileTypedTagsGetter.GetEnum(MetaDataType.GenreCategory);
+    public IReadOnlyList<string> Grouping => _musicFileTypedTagsGetter.GetEnum(MetaDataType.Grouping);
+    public IReadOnlyList<string> Keywords => _musicFileTypedTagsGetter.GetEnum(MetaDataType.Keywords);
+    public bool HasLyrics => _musicFileTypedTagsGetter.GetBool(MetaDataType.HasLyrics);
     public string Lyricist => GetTagValue(MetaDataType.Lyricist);
     public string Lyrics => GetTagValue(MetaDataType.Lyrics);
-    public IReadOnlyList<string> Mood => GetEnumTagValue(MetaDataType.Mood);
-    public IReadOnlyList<string> Occasion => GetEnumTagValue(MetaDataType.Occasion);
+    public IReadOnlyList<string> Mood => _musicFileTypedTagsGetter.GetEnum(MetaDataType.Mood);
+    public IReadOnlyList<string> Occasion => _musicFileTypedTagsGetter.GetEnum(MetaDataType.Occasion);
     public string Origin => GetTagValue(MetaDataType.Origin);
     public string Publisher => GetTagValue(MetaDataType.Publisher);
-    public IReadOnlyList<string> Quality => GetEnumTagValue(MetaDataType.Quality);
-    public Rating Rating => GetRatingTagValue(MetaDataType.Rating);
-    public LoveBanRating RatingLove => GetLoveBanRatingTagValue(MetaDataType.RatingLove);
-    public Rating RatingAlbum => GetRatingTagValue(MetaDataType.RatingAlbum);
-    public IReadOnlyList<string> Tempo => GetEnumTagValue(MetaDataType.Tempo);
-    public long TrackNo => GetNumberTagValue(MetaDataType.TrackNo);
-    public long TrackCount => GetNumberTagValue(MetaDataType.TrackCount);
+    public IReadOnlyList<string> Quality => _musicFileTypedTagsGetter.GetEnum(MetaDataType.Quality);
+    public Rating Rating => _musicFileTypedTagsGetter.GetRating(MetaDataType.Rating);
+    public LoveBanRating RatingLove => _musicFileTypedTagsGetter.GetLoveBanRating(MetaDataType.RatingLove);
+    public Rating RatingAlbum => _musicFileTypedTagsGetter.GetRating(MetaDataType.RatingAlbum);
+    public IReadOnlyList<string> Tempo => _musicFileTypedTagsGetter.GetEnum(MetaDataType.Tempo);
+    public long TrackNo => _musicFileTypedTagsGetter.GetNumber(MetaDataType.TrackNo);
+    public long TrackCount => _musicFileTypedTagsGetter.GetNumber(MetaDataType.TrackCount);
     public IReadOnlyVariantField Virtual1 { get; }
     public IReadOnlyVariantField Virtual2 { get; }
     public IReadOnlyVariantField Virtual3 { get; }
@@ -94,7 +94,7 @@ public sealed class CachingReadOnlyMusicFile : IReadOnlyMusicFile
     public IReadOnlyVariantField Virtual23 { get; }
     public IReadOnlyVariantField Virtual24 { get; }
     public IReadOnlyVariantField Virtual25 { get; }
-    public long Year => GetNumberTagValue(MetaDataType.Year);
+    public long Year => _musicFileTypedTagsGetter.GetNumber(MetaDataType.Year);
     public string SortTitle => GetTagValue(MetaDataType.SortTitle);
     public string SortAlbum => GetTagValue(MetaDataType.SortAlbum);
     public string SortAlbumArtist => GetTagValue(MetaDataType.SortAlbumArtist);
@@ -102,47 +102,29 @@ public sealed class CachingReadOnlyMusicFile : IReadOnlyMusicFile
     public string SortComposer => GetTagValue(MetaDataType.SortComposer);
     public string Work => GetTagValue(MetaDataType.Work);
     public string MovementName => GetTagValue(MetaDataType.MovementName);
-    public long MovementNo => GetNumberTagValue(MetaDataType.MovementNo);
-    public long MovementCount => GetNumberTagValue(MetaDataType.MovementCount);
-    public bool ShowMovement => GetBoolTagValue(MetaDataType.ShowMovement);
+    public long MovementNo => _musicFileTypedTagsGetter.GetNumber(MetaDataType.MovementNo);
+    public long MovementCount => _musicFileTypedTagsGetter.GetNumber(MetaDataType.MovementCount);
+    public bool ShowMovement => _musicFileTypedTagsGetter.GetBool(MetaDataType.ShowMovement);
     public string Language => GetTagValue(MetaDataType.Language);
     public string OriginalArtist => GetTagValue(MetaDataType.OriginalArtist);
-    public DateTime OriginalYear => GetDateTagValue(MetaDataType.OriginalYear);
+    public DateTime OriginalYear => _musicFileTypedTagsGetter.GetDate(MetaDataType.OriginalYear);
     public string OriginalTitle => GetTagValue(MetaDataType.OriginalTitle);
 
     #endregion
 
     private readonly IMusicBeeApi _musicBeeApi;
-    private readonly IFieldValueConverter<bool> _boolFieldValueConverter;
-    private readonly IFieldValueConverter<long> _numberFieldValueConverter;
-    private readonly IFieldValueConverter<DateTime> _dateFieldValueConverter;
-    private readonly IFieldValueConverter<IReadOnlyList<string>> _enumFieldValueConverter;
-    private readonly IFieldValueConverter<IReadOnlyList<string>> _encodedEnumFieldValueConverter;
-    private readonly IFieldValueConverter<Rating> _ratingFieldValueConverter;
-    private readonly IFieldValueConverter<LoveBanRating> _loveBanRatingFieldValueConverter;
+    private readonly IMusicFileTypedTagsGetter _musicFileTypedTagsGetter;
 
     private readonly IDictionary<MetaDataType, string> _cachedTagValues;
 
     public CachingReadOnlyMusicFile(
         string path,
         IMusicBeeApi musicBeeApi,
-        IFieldValueConverter<bool> boolFieldValueConverter,
-        IFieldValueConverter<long> numberFieldValueConverter,
-        IFieldValueConverter<DateTime> dateFieldValueConverter,
-        IFieldValueConverter<IReadOnlyList<string>> enumFieldValueConverter,
-        IFieldValueConverter<IReadOnlyList<string>> encodedEnumFieldValueConverter,
-        IFieldValueConverter<Rating> ratingFieldValueConverter,
-        IFieldValueConverter<LoveBanRating> loveBanRatingFieldValueConverter,
+        MusicFileTypedTagsGetterFactory musicFileTypedTagsGetterFactory,
         ReadOnlyVariantFieldFactory readOnlyVariantFieldFactory)
     {
         _musicBeeApi = musicBeeApi;
-        _boolFieldValueConverter = boolFieldValueConverter;
-        _numberFieldValueConverter = numberFieldValueConverter;
-        _dateFieldValueConverter = dateFieldValueConverter;
-        _enumFieldValueConverter = enumFieldValueConverter;
-        _encodedEnumFieldValueConverter = encodedEnumFieldValueConverter;
-        _ratingFieldValueConverter = ratingFieldValueConverter;
-        _loveBanRatingFieldValueConverter = loveBanRatingFieldValueConverter;
+        _musicFileTypedTagsGetter = musicFileTypedTagsGetterFactory(GetTagValue);
 
         #region Custom fields creation
 
@@ -205,40 +187,5 @@ public sealed class CachingReadOnlyMusicFile : IReadOnlyMusicFile
         value = _musicBeeApi.Library_GetFileTag(Path, metaDataType);
         _cachedTagValues[metaDataType] = value;
         return value;
-    }
-
-    private bool GetBoolTagValue(MetaDataType metaDataType)
-    {
-        return _boolFieldValueConverter.ConvertFromString(GetTagValue(metaDataType));
-    }
-
-    private long GetNumberTagValue(MetaDataType metaDataType)
-    {
-        return _numberFieldValueConverter.ConvertFromString(GetTagValue(metaDataType));
-    }
-
-    private DateTime GetDateTagValue(MetaDataType metaDataType)
-    {
-        return _dateFieldValueConverter.ConvertFromString(GetTagValue(metaDataType));
-    }
-
-    private IReadOnlyList<string> GetEnumTagValue(MetaDataType metaDataType)
-    {
-        return _enumFieldValueConverter.ConvertFromString(GetTagValue(metaDataType));
-    }
-
-    private IReadOnlyList<string> GetEncodedEnumTagValue(MetaDataType metaDataType)
-    {
-        return _encodedEnumFieldValueConverter.ConvertFromString(GetTagValue(metaDataType));
-    }
-
-    private Rating GetRatingTagValue(MetaDataType metaDataType)
-    {
-        return _ratingFieldValueConverter.ConvertFromString(GetTagValue(metaDataType));
-    }
-
-    private LoveBanRating GetLoveBanRatingTagValue(MetaDataType metaDataType)
-    {
-        return _loveBanRatingFieldValueConverter.ConvertFromString(GetTagValue(metaDataType));
     }
 }

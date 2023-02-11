@@ -40,36 +40,18 @@ public sealed class CachingReadOnlyMusicFile : IReadOnlyMusicFile
     #endregion
 
     private readonly IMusicBeeApi _musicBeeApi;
-    private readonly IFieldValueConverter<bool> _boolFieldValueConverter;
-    private readonly IFieldValueConverter<long> _numberFieldValueConverter;
-    private readonly IFieldValueConverter<DateTime> _dateFieldValueConverter;
-    private readonly IFieldValueConverter<IReadOnlyList<string>> _enumFieldValueConverter;
-    private readonly IFieldValueConverter<IReadOnlyList<string>> _encodedEnumFieldValueConverter;
-    private readonly IFieldValueConverter<Rating> _ratingFieldValueConverter;
-    private readonly IFieldValueConverter<LoveBanRating> _loveBanRatingFieldValueConverter;
+    private readonly IMusicFileTypedTagsGetter _musicFileTypedTagsGetter;
 
     private readonly IDictionary<MetaDataType, string> _cachedTagValues;
 
     public CachingReadOnlyMusicFile(
         string path,
         IMusicBeeApi musicBeeApi,
-        IFieldValueConverter<bool> boolFieldValueConverter,
-        IFieldValueConverter<long> numberFieldValueConverter,
-        IFieldValueConverter<DateTime> dateFieldValueConverter,
-        IFieldValueConverter<IReadOnlyList<string>> enumFieldValueConverter,
-        IFieldValueConverter<IReadOnlyList<string>> encodedEnumFieldValueConverter,
-        IFieldValueConverter<Rating> ratingFieldValueConverter,
-        IFieldValueConverter<LoveBanRating> loveBanRatingFieldValueConverter,
+        MusicFileTypedTagsGetterFactory musicFileTypedTagsGetterFactory,
         ReadOnlyVariantFieldFactory readOnlyVariantFieldFactory)
     {
         _musicBeeApi = musicBeeApi;
-        _boolFieldValueConverter = boolFieldValueConverter;
-        _numberFieldValueConverter = numberFieldValueConverter;
-        _dateFieldValueConverter = dateFieldValueConverter;
-        _enumFieldValueConverter = enumFieldValueConverter;
-        _encodedEnumFieldValueConverter = encodedEnumFieldValueConverter;
-        _ratingFieldValueConverter = ratingFieldValueConverter;
-        _loveBanRatingFieldValueConverter = loveBanRatingFieldValueConverter;
+        _musicFileTypedTagsGetter = musicFileTypedTagsGetterFactory(GetTagValue);
 
         #region Custom fields creation
 
@@ -101,56 +83,27 @@ public sealed class CachingReadOnlyMusicFile : IReadOnlyMusicFile
         _cachedTagValues[metaDataType] = value;
         return value;
     }
-
-    private bool GetBoolTagValue(MetaDataType metaDataType)
-    {
-        return _boolFieldValueConverter.ConvertFromString(GetTagValue(metaDataType));
-    }
-
-    private long GetNumberTagValue(MetaDataType metaDataType)
-    {
-        return _numberFieldValueConverter.ConvertFromString(GetTagValue(metaDataType));
-    }
-
-    private DateTime GetDateTagValue(MetaDataType metaDataType)
-    {
-        return _dateFieldValueConverter.ConvertFromString(GetTagValue(metaDataType));
-    }
-
-    private IReadOnlyList<string> GetEnumTagValue(MetaDataType metaDataType)
-    {
-        return _enumFieldValueConverter.ConvertFromString(GetTagValue(metaDataType));
-    }
-
-    private IReadOnlyList<string> GetEncodedEnumTagValue(MetaDataType metaDataType)
-    {
-        return _encodedEnumFieldValueConverter.ConvertFromString(GetTagValue(metaDataType));
-    }
-
-    private Rating GetRatingTagValue(MetaDataType metaDataType)
-    {
-        return _ratingFieldValueConverter.ConvertFromString(GetTagValue(metaDataType));
-    }
-
-    private LoveBanRating GetLoveBanRatingTagValue(MetaDataType metaDataType)
-    {
-        return _loveBanRatingFieldValueConverter.ConvertFromString(GetTagValue(metaDataType));
-    }
 }
 <#+
     private static string GetMethodName(FieldType fieldType)
     {
-        return fieldType switch {
+        var classField = fieldType != FieldType.String
+            ? "_musicFileTypedTagsGetter."
+            : string.Empty;
+
+        var method = fieldType switch {
             FieldType.String => "GetTagValue",
-            FieldType.Bool => "GetBoolTagValue",
-            FieldType.Number => "GetNumberTagValue",
-            FieldType.Date => "GetDateTagValue",
-            FieldType.Enum => "GetEnumTagValue",
-            FieldType.EncodedEnum => "GetEncodedEnumTagValue",
-            FieldType.Rating => "GetRatingTagValue",
-            FieldType.LoveBanRating => "GetLoveBanRatingTagValue",
+            FieldType.Bool => "GetBool",
+            FieldType.Number => "GetNumber",
+            FieldType.Date => "GetDate",
+            FieldType.Enum => "GetEnum",
+            FieldType.EncodedEnum => "GetEncodedEnum",
+            FieldType.Rating => "GetRating",
+            FieldType.LoveBanRating => "GetLoveBanRating",
             FieldType.Variant => throw new NotSupportedException(),
             _ => throw new ArgumentOutOfRangeException(nameof(fieldType), fieldType, null)
             };
+
+        return $"{classField}{method}";
     }
 #>
