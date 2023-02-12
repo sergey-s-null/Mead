@@ -8,6 +8,17 @@
 		<RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
 	</PropertyGroup>
 
+	<PropertyGroup>
+		<PackageId>Mead.MusicBee.Remoting.Client</PackageId>
+		<Version>1.0.0</Version>
+		<Title>Mead.MusicBee.Remoting.Client</Title>
+		<Authors>Sergey Semenov</Authors>
+		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/sergey-s-null/Mead</PackageProjectUrl>
+		<Description>Library contains Grpc client for access to remote MusicBee Api.</Description>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<Protobuf Include="$(SolutionDir)\Mead.MusicBee.Remoting.Proto\Protos\MusicBeeApiService.proto">
 			<GrpcServices>Client</GrpcServices>
