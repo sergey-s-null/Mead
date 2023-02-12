@@ -9,11 +9,17 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Reference Include="System.Net.Http" />
+	  <Reference Include="System.Net.Http" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Mead.MusicBee\Mead.MusicBee.csproj" />
+	  <None Update="Protos\MusicBeeApiService.tt">
+	    <Generator>TextTemplatingFileGenerator</Generator>
+	    <LastGenOutput>MusicBeeApiService.proto</LastGenOutput>
+	  </None>
+	  <None Update="Protos\MusicBeeApiService.proto">
+	    <DependentUpon>MusicBeeApiService.tt</DependentUpon>
+	  </None>
 	</ItemGroup>
 
 </Project>

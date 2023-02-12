@@ -1,0 +1,17 @@
+﻿name: "[Mead.MusicBee.Remoting.Client] Create release"
+
+on:
+  push:
+    tags:
+      - release/Mead.MusicBee.Remoting.Client/*
+
+jobs:
+  build:
+    permissions:
+      contents: write
+    
+    uses: ./.github/workflows/CreateRelease.yml
+    with:
+      project-name: Mead.MusicBee.Remoting.Client
+    secrets:
+      nuget-api-key: ${{ secrets.NUGET_API_KEY }}
