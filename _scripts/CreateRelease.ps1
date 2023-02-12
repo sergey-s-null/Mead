@@ -1,8 +1,7 @@
 ﻿$availableProjects = `
     "Mead.MusicBee", `
     "Mead.MusicBee.Api", `
-    "Mead.MusicBee.Api.Autofac.DependencyInjection", `
-    "Mead.MusicBee.MetaInfo"
+    "Mead.MusicBee.Api.Autofac.DependencyInjection"
 
 $project = $args[0]
 if (-not($availableProjects -CContains $project))

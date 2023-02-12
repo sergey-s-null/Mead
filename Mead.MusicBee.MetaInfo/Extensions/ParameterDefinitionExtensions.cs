@@ -1,5 +1,4 @@
-﻿using System;
-using Mead.MusicBee.MetaInfo.Entities;
+﻿using Mead.MusicBee.MetaInfo.Entities;
 
 namespace Mead.MusicBee.MetaInfo.Extensions;
 
