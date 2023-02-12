@@ -17,13 +17,13 @@ using Mead.MusicBee.Services;
 
 namespace Mead.MusicBee.Api.Services;
 
-public sealed class MusicBeeApiMemoryContainerWrapper : IMusicBeeApi
+public sealed class MusicBeeApiMemoryContainerWrapper : IExtendedMusicBeeApi
 {
-    private readonly MusicBeeApiMemoryContainer _mbApi;
+    private readonly MusicBeeApiMemoryContainer _musicBeeApiMemoryContainer;
     
-    public MusicBeeApiMemoryContainerWrapper(MusicBeeApiMemoryContainer mbApi)
+    public MusicBeeApiMemoryContainerWrapper(MusicBeeApiMemoryContainer musicBeeApiMemoryContainer)
     {
-        _mbApi = mbApi;
+        _musicBeeApiMemoryContainer = musicBeeApiMemoryContainer;
     }
 <#
     foreach (var method in methods)
@@ -38,7 +38,7 @@ public sealed class MusicBeeApiMemoryContainerWrapper : IMusicBeeApi
 
     public <#= returnType #> <#= method.Name #>(<#= classMethodArguments #>)
     {
-        <#= returnPart #>_mbApi.<#= method.Name #>(<#= apiCallingArguments #>);
+        <#= returnPart #>_musicBeeApiMemoryContainer.<#= method.Name #>(<#= apiCallingArguments #>);
     }
 <#
     }

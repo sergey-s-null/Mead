@@ -22,6 +22,7 @@ public static class ContainerBuilderExtensions
     {
         builder
             .RegisterType<MusicBeeApiMemoryContainerWrapper>()
+            .As<IExtendedMusicBeeApi>()
             .As<IMusicBeeApi>()
             .SingleInstance();
     }
