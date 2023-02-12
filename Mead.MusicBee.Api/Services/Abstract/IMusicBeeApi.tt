@@ -1,6 +1,5 @@
 <#@ template language="C#" #>
 <#@ assembly name="$(SolutionDir)\Mead.MusicBee.MetaInfo\bin\debug\net472\Mead.MusicBee.MetaInfo.dll"#>
-<#@ import namespace="System.Linq" #>
 <#@ import namespace="Mead.MusicBee.MetaInfo.Extensions" #>
 <#@ import namespace="Mead.MusicBee.MetaInfo.Helpers" #>
 <#

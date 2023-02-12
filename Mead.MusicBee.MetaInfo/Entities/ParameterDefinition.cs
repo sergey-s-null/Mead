@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Mead.MusicBee.MetaInfo.Entities;
+﻿namespace Mead.MusicBee.MetaInfo.Entities;
 
 public sealed record ParameterDefinition(
     Type Type,

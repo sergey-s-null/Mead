@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace Mead.MusicBee.MetaInfo.Extensions;
+﻿namespace Mead.MusicBee.MetaInfo.Extensions;
 
 internal static class EnumerableExtensions
 {
