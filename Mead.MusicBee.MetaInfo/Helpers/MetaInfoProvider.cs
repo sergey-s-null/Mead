@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 using Mead.MusicBee.MetaInfo.Entities;
 using Mead.MusicBee.MetaInfo.Extensions;
 using Mead.MusicBee.Services;
@@ -18,7 +15,7 @@ public static class MetaInfoProvider
         "Playlist_QueryGetAllFiles",
     };
 
-    private static readonly ISet<string> OSSpecificMethods = new HashSet<string>
+    private static readonly ISet<string> PlatformDependantMethods = new HashSet<string>
     {
         // IntPtr
         "MB_GetWindowHandle",
@@ -54,13 +51,13 @@ public static class MetaInfoProvider
     {
         return GetMethods(x =>
             !ObsoleteMethods.Contains(x.Name)
-            && !OSSpecificMethods.Contains(x.Name)
+            && !PlatformDependantMethods.Contains(x.Name)
         );
     }
 
-    public static IReadOnlyCollection<MethodDefinition> GetOSSpecificMethods()
+    public static IReadOnlyCollection<MethodDefinition> GetPlatformDependantMethods()
     {
-        return GetMethods(x => OSSpecificMethods.Contains(x.Name));
+        return GetMethods(x => PlatformDependantMethods.Contains(x.Name));
     }
 
     public static IReadOnlyCollection<MethodDefinition> GetMethodsExceptObsolete()
