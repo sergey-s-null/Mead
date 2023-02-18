@@ -6,7 +6,7 @@
 		<Nullable>enable</Nullable>
 		<LangVersion>11</LangVersion>
 		<RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
-		<AssemblyName>mb_RemotingPlugin</AssemblyName>
+		<PluginAssemblyName>mb_RemotingPlugin</PluginAssemblyName>
 	</PropertyGroup>
 	
 	<ItemGroup>
@@ -28,6 +28,7 @@
 	    <PrivateAssets>all</PrivateAssets>
 	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	  </PackageReference>
+	  <PackageReference Include="ILRepack.Lib.MSBuild" Version="2.1.18" />
 	  <PackageReference Include="Mead.MusicBee" Version="1.1.1" />
 	  <PackageReference Include="Mead.MusicBee.Api" Version="1.0.0" />
 	  <PackageReference Include="Mead.MusicBee.Api.Autofac.DependencyInjection" Version="1.0.1" />

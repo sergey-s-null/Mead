@@ -36,6 +36,12 @@
         "resolved": "2.51.0",
         "contentHash": "dGWgVYiTiwdlQuTK8kqqOkhYVHuOOuq3DVBmkjFwNOYQR9FW9YyEu0TXpxItc7W4xQ4lnahCLuHMNHd4012bnQ=="
       },
+      "ILRepack.Lib.MSBuild": {
+        "type": "Direct",
+        "requested": "[2.1.18, )",
+        "resolved": "2.1.18",
+        "contentHash": "CkJ5v0PVZ8k3XXYLR9B99dOX7hGdK4cPMAaICoGlPJTgHRwVqMHC0zsUbiWedSfUqf9sdXlXUDnG9HMMhzynFg=="
+      },
       "Mead.MusicBee": {
         "type": "Direct",
         "requested": "[1.1.1, )",
