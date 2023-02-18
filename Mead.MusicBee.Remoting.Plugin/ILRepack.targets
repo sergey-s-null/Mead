@@ -12,6 +12,12 @@
 			<InputAssemblies Include="$(OutputPath)\Mead.MusicBee.Api.dll"/>
 			<InputAssemblies Include="$(OutputPath)\Mead.MusicBee.Api.Autofac.DependencyInjection.dll"/>
 			<InputAssemblies Include="$(OutputPath)\Microsoft.Bcl.AsyncInterfaces.dll"/>
+			<InputAssemblies Include="$(OutputPath)\System.Buffers.dll"/>
+			<InputAssemblies Include="$(OutputPath)\System.Diagnostics.DiagnosticSource.dll"/>
+			<InputAssemblies Include="$(OutputPath)\System.Memory.dll"/>
+			<InputAssemblies Include="$(OutputPath)\System.Numerics.Vectors.dll"/>
+			<InputAssemblies Include="$(OutputPath)\System.Runtime.CompilerServices.Unsafe.dll"/>
+			<InputAssemblies Include="$(OutputPath)\System.Threading.Tasks.Extensions.dll"/>
 		</ItemGroup>
 
 		<ItemGroup>
