@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<Target Name="Pack plugin into single dll" AfterTargets="Build">
+
+		<ItemGroup>
+			<InputAssemblies Include="$(OutputPath)\$(AssemblyName).dll"/>
+			<InputAssemblies Include="$(OutputPath)\Autofac.dll"/>
+			<InputAssemblies Include="$(OutputPath)\Google.Protobuf.dll"/>
+			<InputAssemblies Include="$(OutputPath)\Grpc.Core.dll"/>
+			<InputAssemblies Include="$(OutputPath)\Grpc.Core.Api.dll"/>
+			<InputAssemblies Include="$(OutputPath)\Mead.MusicBee.dll"/>
+			<InputAssemblies Include="$(OutputPath)\Mead.MusicBee.Api.dll"/>
+			<InputAssemblies Include="$(OutputPath)\Mead.MusicBee.Api.Autofac.DependencyInjection.dll"/>
+			<InputAssemblies Include="$(OutputPath)\Microsoft.Bcl.AsyncInterfaces.dll"/>
+		</ItemGroup>
+
+		<ItemGroup>
+			<DoNotInternalizeAssemblies Include="$(AssemblyName)"/>
+		</ItemGroup>
+
+		<ILRepack
+				Parallel="true"
+				Internalize="true"
+				InputAssemblies="@(InputAssemblies)"
+				InternalizeExclude="@(DoNotInternalizeAssemblies)"
+				TargetKind="Dll"
+				OutputFile="$(OutputPath)\$(PluginAssemblyName).dll"
+		/>
+
+	</Target>
+</Project>
